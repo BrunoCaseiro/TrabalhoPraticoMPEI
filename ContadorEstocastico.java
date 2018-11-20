@@ -1,28 +1,45 @@
-import java.util.*;
-
 public class ContadorEstocastico{
-    static double probAdd = 1;      //2^-0 = 1, probabilidade inicial
-    static int n = 0;               //Elementos
+ 	private static double probAdd = 1;             // 2^-0 = 1, probabilidade inicial
+	private static int n = 0;					// Elementos
 
-    public static void add(){
-        if(probAdd >= Math.random()){
-            n++;
-            updateProbability();
-        }
-    }
+	public ContadorEstocastico(){
+		primeiraSolucao();				// Caso nada seja especificado no construtor, executa o contador pela primeira forma
+	}
 
-    public static void updateProbability(){
-        probAdd = 1/(Math.pow(2,n));        //2^-n
-    }
+	public ContadorEstocastico(int anotherWay){	
+		segundaSolucao();				// Caso seja indicado um numero qualquer no construtor, executa o contador pela segunda forma
+	}
+	
+	public void primeiraSolucao(){
+		if(probAdd >= Math.random()) {
+			n++;
+			probAdd = 1/(Math.pow(2,n)); // 2^-n
+		}
+		System.out.println(n);
+		System.out.println(probAdd);
+	}
 
-    // ####################################################
-    // For test purposes only
-    public static void main(String[] args) {
-        add();
-        add();
-        add();
-        System.out.println("probAdd = " + probAdd);
-        System.out.println("n = " + n);
-    }
-    // ####################################################
+	public void segundaSolucao(){
+		if (Math.random() < 0.5) {
+			n++;
+			probAdd = 1/(Math.pow(2,n)); // 2^-n
+		}
+		System.out.println(n);
+		System.out.println(probAdd);
+	}
+
+	// ##########################################################
+	// For test purposes only
+	public static void main(String[] args) {
+		@SuppressWarnings
+		// Acho que precisamos de indicar o numero de elementos ou então fazer um 'for' ou um 'while', para evitar andarmos a criar tantos construtores
+		ContadorEstocastico one = new ContadorEstocastico();
+		ContadorEstocastico two = new ContadorEstocastico();
+		ContadorEstocastico three = new ContadorEstocastico();
+		ContadorEstocastico four = new ContadorEstocastico();			
+		ContadorEstocastico otherWay = new ContadorEstocastico(1);
+		ContadorEstocastico otherWay2 = new ContadorEstocastico(1);
+		ContadorEstocastico otherWay3 = new ContadorEstocastico(1);
+	}
+	// ##########################################################
 }
