@@ -1,58 +1,62 @@
 public class ContadorEstocastico{
- 	private static double probAdd = 1;             // 2^-0 = 1, probabilidade inicial
-	private static int n1 = 0;					// Elementos da primeira solucao
-	private static int n2 = 0;					// Elementos da segunda solucao
+ 	private double probAdd;         // Probabilidade para adicionar novo elemento
+	private int n = 0;			// Numero de elementos
 
+	// Caso nada seja especificado no construtor, executa o contador pela primeira forma
 	public ContadorEstocastico(){
-		primeiraSolucao();				// Caso nada seja especificado no construtor, executa o contador pela primeira forma
+		this.probAdd = 0.5;
 	}
 
+	// Caso seja indicado um numero qualquer no construtor, executa o contador pela segunda forma
 	public ContadorEstocastico(int anotherWay){	
-		segundaSolucao();				// Caso seja indicado um numero qualquer no construtor, executa o contador pela segunda forma
+		this.probAdd = 1;			// Probabilidade inicial (2^-0 = 1)
 	}
 	
 	public void primeiraSolucao(){
-		if (Math.random() < 0.5) {
-			n1++;
+		if (Math.random() < probAdd) {
+			n++;
 		}
-	}
-
-	public static int getN1() {
-		return n1;
-	}
-
-	public static double getProbAdd() {
-		return probAdd;
 	}
 
 	public void segundaSolucao(){
 		if(probAdd >= Math.random()) {
-			n2++;
-			probAdd = 1/(Math.pow(2,n2)); // 2^-n
+			n++;
+			probAdd = 1/(Math.pow(2,n));		// 2^-n
 		}
 	}
 
-	public static int getN2() {
-		return n2;
+	public int getN() {
+		return n;
+	}
+
+	public double getProbAdd() {
+		return probAdd;
 	}
 
 	@Override
 	public String toString() {
-		return "Contador 1: " + n1 + "; Contador 2: " + n2;
+		return "Contador: " + n + " , Probabilidade: " + probAdd;
 	}
 
 	// ##########################################################
 	// For test purposes only
 	public static void main(String[] args) {
-		// Fazer um 'for' ou um 'while' para evitar andarmos a criar tantos construtores
+		
 		ContadorEstocastico one = new ContadorEstocastico();
-		ContadorEstocastico two = new ContadorEstocastico();
-		ContadorEstocastico three = new ContadorEstocastico();
-		ContadorEstocastico four = new ContadorEstocastico();			
-		ContadorEstocastico otherWay = new ContadorEstocastico(1);
-		ContadorEstocastico otherWay2 = new ContadorEstocastico(1);
-		ContadorEstocastico otherWay3 = new ContadorEstocastico(1);
-		ContadorEstocastico otherWay4 = new ContadorEstocastico(1);
+		ContadorEstocastico two = new ContadorEstocastico(1);
+
+		System.out.println("Contagem com a primeira solucao:");
+		for (int i = 0; i < 100; i++) {		// 100 vezes
+			one.primeiraSolucao();
+			System.out.println(one);
+		}
+
+		System.out.println();
+		System.out.println("Contagem com a segunda solucao:");
+		for (int i = 0; i < 100; i++) { 	// 100 vezes
+			two.segundaSolucao();
+			System.out.println(two);
+		}
 	}
 	// ##########################################################
 }
