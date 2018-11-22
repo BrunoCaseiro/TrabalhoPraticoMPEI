@@ -1,6 +1,6 @@
 public class ContadorEstocastico{
  	private double probAdd;         // Probabilidade para adicionar novo elemento
-	private int n = 0;			// Numero de elementos
+	private int n = 0;			    // Numero de elementos
 
 	// Caso nada seja especificado no construtor, executa o contador pela primeira forma
 	public ContadorEstocastico(){
