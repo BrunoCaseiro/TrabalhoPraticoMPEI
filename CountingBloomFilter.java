@@ -4,34 +4,32 @@ public class CountingBloomFilter {
     private int m;                  //elementos
     private int[] bloom;                //Bloom filter array
 
-    //***Methods gerados pelo VS Code***
-    @Override
-    public String toString() {
-        return "{" +
-            " n='" + size() + "'" +
-            ", k='" + getK() + "'" +
-            ", m='" + getM() + "'" +
-            ", B='" + getBloomString() + "'" +
-            "}";
+    public CountingBloomFilter(int n, int k){           //Constructor
+        this.m = 0;
+        this.k = k;
     }
 
     public void initialize(){
         B = new int[n];                 //B é automaticamente inicializado com todos os elementos a 0
     }
 
-    public boolean isMember(){             //Membership Test
-        
+    public boolean isMember(){             //Membership Test, tem de verificar se cada bucket está a zero
+                                            //Podem existir false positives, falta argumento
     }
 
-    public void insert(int key){
+    public void insert(){                   //Falta argumento
 
     }
-
+    
     public void clearAll(){           
 
     }
 
-    public void delete(){
+    public void delete(){               //Decrementa todos os buckets do respetivo member. Falta o argumento
+                                        //Pode existir false negatives
+    }
+
+    public int count(){                 //Não sei bem o que é que esta merda faz mas está nos slides
 
     }
 
@@ -62,32 +60,17 @@ public class CountingBloomFilter {
 
         return s;
     }
-    //End Getters
+    // End Getters
 
-    public CountingBloomFilter(int n, int k){           //Constructor
-        this.m = 0;
-        this.k = k;
-    }
-
-    public void initialize(){
-        B = new int[n];                 //B é automaticamente initialized com todos os elemtnos a 0
-    }
-
-    public boolean isMember(){             //Membership Test, tem de verificar se cada bucket está a zero
-                                            //Podem existir false positives, falta argumento
-    }
-
-    public void insert(){                   //Falta argumento
-
-    // ***Metodos gerados pelo VS Code***
+    // ***Methods gerados pelo VS Code***
     @Override
     public String toString() {
         return "{" +
             " n='" + size() + "'" +
             ", k='" + getK() + "'" +
             ", m='" + getM() + "'" +
-            ", B='" + getBString() + "'" +
-        "}";
+            ", B='" + getBloomString() + "'" +
+            "}";
     }
 
     @Override
@@ -99,15 +82,6 @@ public class CountingBloomFilter {
         }
         CountingBloomFilter countingBloomFilter = (CountingBloomFilter) o;
         return n == countingBloomFilter.n && k == countingBloomFilter.k && m == countingBloomFilter.m && Objects.equals(B, countingBloomFilter.B);
-    }
-
-    public void delete(){               //Decrementa todos os buckets do respetivo member. Falta o argumento
-                                        //Pode existir false negatives
-    }
-
-    public int count(){                 //Não sei bem o que é que esta merda faz mas está nos slides
-
-
     }
 
 
