@@ -4,34 +4,31 @@ public class CountingBloomFilter {
     private int m;                  //elementos
     private int[] bloom;                //Bloom filter array
 
-    //***Methods gerados pelo VS Code***
-    @Override
-    public String toString() {
-        return "{" +
-            " n='" + size() + "'" +
-            ", k='" + getK() + "'" +
-            ", m='" + getM() + "'" +
-            ", B='" + getBString() + "'" +
-            "}";
+    public CountingBloomFilter(int n, int k){           //Constructor
+        this.m = 0;
+        this.k = k;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof CountingBloomFilter)) {
-            return false;
-        }
-        CountingBloomFilter countingBloomFilter = (CountingBloomFilter) o;
-        return n == countingBloomFilter.n && k == countingBloomFilter.k && m == countingBloomFilter.m && Objects.equals(B, countingBloomFilter.B);
+    public void initialize(){
+        B = new int[n];                 //B é automaticamente inicializado com todos os elementos a 0
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(n, k, m, B);
+    public boolean isMember(){             //Membership Test
+        
     }
 
-    //End Methods do VS Code
+    public void insert(int key){
+
+    }
+
+    public void clearAll(){           
+
+    }
+
+    public void delete(){
+
+    }
+
     // ***Getters***
     public int size() { // ou getN(), número de buckets
         return n;
@@ -59,34 +56,36 @@ public class CountingBloomFilter {
 
         return s;
     }
-    //End Getters
+    // End Getters
 
-    public CountingBloomFilter(int n, int k){           //Constructor
-        this.m = 0;
-        this.k = k;
+    // ***Metodos gerados pelo VS Code***
+    @Override
+    public String toString() {
+        return "{" +
+            " n='" + size() + "'" +
+            ", k='" + getK() + "'" +
+            ", m='" + getM() + "'" +
+            ", B='" + getBString() + "'" +
+        "}";
     }
 
-    public void initialize(){
-        B = new int[n];                 //B é automaticamente initialized com todos os elemtnos a 0
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof CountingBloomFilter)) {
+            return false;
+        }
+        CountingBloomFilter countingBloomFilter = (CountingBloomFilter) o;
+        return n == countingBloomFilter.n && k == countingBloomFilter.k && m == countingBloomFilter.m && Objects.equals(B, countingBloomFilter.B);
     }
 
-    public boolean isMember(){             //Membership Test
-        
+    @Override
+    public int hashCode() {
+        return Objects.hash(n, k, m, B);
     }
 
-    public void insert(int key){
-
-    }
-
-    public void clearAll(){           
-
-    }
-
-    public void delete(){
-
-    }
-
-
+    // End Metodos do VS Code
 
 
 
