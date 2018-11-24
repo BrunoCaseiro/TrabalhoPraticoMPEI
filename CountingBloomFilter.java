@@ -11,7 +11,7 @@ public class CountingBloomFilter {
             " n='" + size() + "'" +
             ", k='" + getK() + "'" +
             ", m='" + getM() + "'" +
-            ", B='" + getBString() + "'" +
+            ", B='" + getBloomString() + "'" +
             "}";
     }
 
@@ -45,11 +45,11 @@ public class CountingBloomFilter {
         return m;
     }
 
-    public int[] getB() {
-        return B;
+    public int[] getBloom() {
+        return bloom;
     }
 
-    public String getBString(){
+    public String getBloomString(){
         String s = "";
         int bloom[] = getB();
         s = "B[" + 0 + "]= " + bloom[i];
@@ -70,11 +70,11 @@ public class CountingBloomFilter {
         B = new int[n];                 //B é automaticamente initialized com todos os elemtnos a 0
     }
 
-    public boolean isMember(){             //Membership Test
-        
+    public boolean isMember(){             //Membership Test, tem de verificar se cada bucket está a zero
+                                            //Podem existir false positives, falta argumento
     }
 
-    public void insert(int key){
+    public void insert(){                   //Falta argumento
 
     }
 
@@ -82,11 +82,14 @@ public class CountingBloomFilter {
 
     }
 
-    public void delete(){
-
+    public void delete(){               //Decrementa todos os buckets do respetivo member. Falta o argumento
+                                        //Pode existir false negatives
     }
 
+    public int count(){                 //Não sei bem o que é que esta merda faz mas está nos slides
 
+
+    }
 
 
 
