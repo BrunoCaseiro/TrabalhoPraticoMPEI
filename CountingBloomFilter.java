@@ -1,8 +1,10 @@
+//Foi extraída bastante informação dos slidas das TPs
 public class CountingBloomFilter {
     private int n;                  //buckets aka tamanho do bloom filter
     private int k;                  //nº hash functions, arg do method insert()
     private int m;                  //elementos
-    private int[] bloom;                //Bloom filter array
+    private int[] bloom;            //Bloom filter array
+    private int p =                 //False Positive probability, tem de se adicionar o valor default
 
     //***Methods gerados pelo VS Code***
     @Override
@@ -61,9 +63,9 @@ public class CountingBloomFilter {
     }
     //End Getters
 
-    public CountingBloomFilter(int n, int k){           //Constructor
+    public CountingBloomFilter(int n){           //Constructor
         this.m = 0;
-        this.k = k;
+        k = optimalValueK();
     }
 
     public void initialize(){
@@ -86,13 +88,19 @@ public class CountingBloomFilter {
                                         //Pode existir false negatives
     }
 
-    public int count(){                 //Não sei bem o que é que esta merda faz mas está nos slides
+    public int count(){                 //Ir buscar os buckets do elemento e ficar com o menor valor. Falta arg
 
 
     }
 
+    public String stringToHash(){
 
+    }
 
+    public int optimalValueK(){         // https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions
+                                        // k = -log(2)*p, sendo p o fpRate
+
+    }
 
 
 
