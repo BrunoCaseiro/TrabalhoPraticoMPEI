@@ -2,16 +2,16 @@ public class CountingBloomFilter {
     private int n;                  //buckets aka tamanho do bloom filter
     private int k;                  //nº hash functions, arg do method insert()
     private int m;                  //elementos
-    private int[] B;                //Bloom filter array
+    private int[] bloom;                //Bloom filter array
 
     //***Methods gerados pelo VS Code***
     @Override
     public String toString() {
         return "{" +
-            " n='" + getN() + "'" +
+            " n='" + size() + "'" +
             ", k='" + getK() + "'" +
             ", m='" + getM() + "'" +
-            ", B='" + getB() + "'" +
+            ", B='" + getBString() + "'" +
             "}";
     }
 
@@ -33,7 +33,7 @@ public class CountingBloomFilter {
 
     //End Methods do VS Code
     // ***Getters***
-    public int size() { // ou getN()
+    public int size() { // ou getN(), número de buckets
         return n;
     }
 
@@ -41,12 +41,23 @@ public class CountingBloomFilter {
         return k;
     }
 
-    public int getM() {
+    public int getM() {             //Elementos alocados
         return m;
     }
 
     public int[] getB() {
         return B;
+    }
+
+    public String getBString(){
+        String s = "";
+        int bloom[] = getB();
+        s = "B[" + 0 + "]= " + bloom[i];
+        for (int i = 1; i < bloom.length; i++) {
+            s = s + "; B[" + i + "]= " + bloom[i];
+        }
+
+        return s;
     }
     //End Getters
 
@@ -67,7 +78,11 @@ public class CountingBloomFilter {
 
     }
 
-    public void clear(){           
+    public void clearAll(){           
+
+    }
+
+    public void delete(){
 
     }
 
