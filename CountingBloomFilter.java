@@ -25,7 +25,7 @@ public class CountingBloomFilter {
     }
     
     public void clearAll(){           
-
+        Arrays.fill(bloom, 0);
     }
 
     public void delete(String elemento){                // Decrementa todos os buckets do respetivo member. Falta o argumento
@@ -82,28 +82,22 @@ public class CountingBloomFilter {
 
     // ***Metodos gerados pelo VS Code***
     @Override
-    public String toString() {
-        return "{" +
-            " n='" + size() + "'" +
-            ", k='" + getK() + "'" +
-            ", m='" + getM() + "'" +
-            ", p='" + getP() + "'" +
-            ", B='" + getBloomToString() + "'" +
-        "}";
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof CountingBloomFilter)) {
+            return false;
+        }
+        CountingBloomFilter countingBloomFilter = (CountingBloomFilter) o;
+        return n == countingBloomFilter.n && k == countingBloomFilter.k && m == countingBloomFilter.m && p == countingBloomFilter.p && Objects.equals(bloom, countingBloomFilter.bloom);
     }
 
-                            // NECESSARIO GERAR OUTRA VEZ O METODO EQUALS, JA NAO ESTA ATUALIZADO
-    // @Override
-    // public boolean equals(Object o) {
-    //     if (o == this)
-    //         return true;
-    //     if (!(o instanceof CountingBloomFilter)) {
-    //         return false;
-    //     }
-    //     CountingBloomFilter countingBloomFilter = (CountingBloomFilter) o;
-    //     return n == countingBloomFilter.n && k == countingBloomFilter.k && m == countingBloomFilter.m && Objects.equals(B, countingBloomFilter.B);
-    // }
-    
+    @Override
+    public String toString() {
+        return "{" + " n='" + getN() + "'" + ", k='" + getK() + "'" + ", m='" + getM() + "'" + ", p='" + getP() + "'" + ", bloom='" + getBloomToString() + "'" + "}";
+    }
+
+
     // End Metodos gerados pelo VS Code
 
 
