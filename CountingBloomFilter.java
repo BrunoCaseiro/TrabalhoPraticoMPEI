@@ -9,30 +9,34 @@ public class CountingBloomFilter {
     private int[] bloom;            // Bloom filter array
 
     public CountingBloomFilter(int n){
+        bloom = new int[n];                             // Automaticamente inicializa B com todos os elementos a 0
         this.m = 0;
         this.n = n;
-        p = 0.01;                   // 0.01 default false positive probability
+        p = 0.01;                                       // 0.01 default false positive probability
         k = optimalValueK();
     }
 
-    public CountingBloomFilter(int n, double p) {    // Quando NÂO é usado o p default
+    public CountingBloomFilter(int n, double p) {       // Quando NÂO é usado o p default
+        bloom = new int[n];                             // Automaticamente inicializa B com todos os elementos a 0
         this.m = 0;
         this.n = n;
         this.p = p;
         k = optimalValueK();
     }
 
-    public CountingBloomFilter(int n, int k) {       // Neste caso, a variável p não é necessária
+    public CountingBloomFilter(int n, int k) {          // Neste caso, a variável p não é necessária
+        bloom = new int[n];                             // Automaticamente inicializa B com todos os elementos a 0
         this.m = 0;
         this.k = k;
-        p = Math.pow(1 - exp(-(k*n)/m),k);
+        p = Math.pow((1 - Math.exp(-k * (double) n/(double) m)), k); 
     }
 
-    public void initialize(){
-        bloom = new int[n];                             // Automaticamente inicializa B com todos os elementos a 0
-    }
+    // Removida funcao de inicializar o array, visto que ja nao necessitamos 
+    // A inicializacao do array deve ser feita no construtor
+    // public void initialize(){
+    // }
 
-    public boolean isMember(String elemento, int[] bloom, int k){           // Membership Test, tem de verificar se cada bucket está a zero
+    public boolean isMember(String elemento, int k){           // Membership Test, tem de verificar se cada bucket está a zero
         int key;
         for (int i = 0; i < k; i++) {
             key = stringToHash(elemento);
@@ -43,7 +47,7 @@ public class CountingBloomFilter {
         return true;                                                             
     }
 
-    public void insert(String elemento, int[] bloom, int k){                
+    public void insert(String elemento, int k){                
         int key;
         for (int i = 0; i < k; i++) {
            key = stringToHash(elemento);
@@ -56,8 +60,8 @@ public class CountingBloomFilter {
         Arrays.fill(bloom, 0);
     }
 
-    public boolean delete(String elemento, int[] bloom, int k){                // Decrementa todos os buckets do respetivo member
-        if(isMember(elemento, bloom, k)){
+    public boolean delete(String elemento, int k){                // Decrementa todos os buckets do respetivo member
+        if(isMember(elemento, k)){
             int key;
             for (int i = 0; i < k; i++) {
                 key = stringToHash(elemento);
@@ -71,8 +75,8 @@ public class CountingBloomFilter {
         }                                         
     }
 
-    public int count(){                 // Ir buscar os buckets do elemento e ficar com o menor valor
-        int key = stringtoHash(elemento);
+    public int count(String elemento){                 // Ir buscar os buckets do elemento e ficar com o menor valor
+        int key = stringToHash(elemento);
         int min = bloom[key];
         
         for (int i = 1; i < k; i++) {
@@ -85,12 +89,12 @@ public class CountingBloomFilter {
     }
 
     public int stringToHash(String elemento){
-
-        return 0;
+        int key = elemento.hashCode();
+        return key;
     }
 
-    public int optimalValueK(){         // https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions            
-        return (m/n)*Math.log(2);       // k = (m/n)*ln2, sendo p a probabilidade de false positive
+    public int optimalValueK(){                 // https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions            
+        return (int) ((m/n)*Math.log(2));       // k = (m/n)*ln2, sendo p a probabilidade de false positive
     }
 
     // ***Getters***
@@ -106,7 +110,7 @@ public class CountingBloomFilter {
         return m;
     }
 
-    public int getP() {                 // Retorna nº de falsos positivos
+    public double getP() {                 // Retorna nº de falsos positivos
         return p;
     }
 
@@ -140,17 +144,20 @@ public class CountingBloomFilter {
 
     @Override
     public String toString() {
-        return "{" + " n='" + getN() + "'" + ", k='" + getK() + "'" + ", m='" + getM() + "'" + ", p='" + getP() + "'" + ", bloom='" + getBloomToString() + "'" + "}";
+        return "{" + " n='" + size() + "'" + ", k='" + getK() + "'" + ", m='" + getM() + "'" + ", p='" + getP() + "'" + ", bloom='" + getBloomToString() + "'" + "}";
     }
-
 
     // End Metodos gerados pelo VS Code
 
     // ##########################################################
 	// For test purposes only
     public static void main(String[] args) {
-        
-
+        CountingBloomFilter teste = new CountingBloomFilter(1000);
+        teste.insert("teste", 3);
+        teste.isMember("teste", 3);
+        teste.size();
+        teste.delete("teste", 3);
+        teste.isMember("teste", 3);
     }
     // ##########################################################
 }
