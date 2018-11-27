@@ -57,8 +57,11 @@ public class CountingBloomFilter {
        m++;
     }
     
-    public void clearAll(){           
-        Arrays.fill(bloom, 0);
+    public void reset(){           
+        for (int i = 0; i < n; i++) {
+            bloom[i]=0;
+        }
+        m = 0;
     }
 
     public boolean delete(String elemento, int k){                // Decrementa todos os buckets do respetivo member
@@ -170,10 +173,14 @@ public class CountingBloomFilter {
         System.out.println(teste.isMember("add3", 3));
         System.out.println(teste.size());
         System.out.println(teste.getM());
-        teste.clearAll();
+        teste.reset();
+        System.out.println(teste.isMember("add1", 3));
+        System.out.println(teste.isMember("add2", 3));
+        System.out.println(teste.isMember("add3", 3));
         System.out.println(teste.getM());
+        System.out.println(teste.getBloomToString());
 
-        // RESULTADO EXPECTED:
+        // RESULTADO ESPERADO:
         // true
         // 1000
         // 1
@@ -186,6 +193,7 @@ public class CountingBloomFilter {
         // 1000
         // 3
         // 0
+        // Todos os slots do bloom filter (0 até n-1) têm de ser 0
     }
     // ##########################################################
 }
