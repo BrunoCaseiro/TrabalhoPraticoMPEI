@@ -9,7 +9,7 @@ public class CountingBloomFilter {
     private int[] bloom;            // Bloom filter array
 
     public CountingBloomFilter(int n){
-        initialize();                                   // Automaticamente inicializa B com todos os elementos a 0
+        initialize();                                   
         this.m = 0;
         this.n = n;
         p = 0.01;                                       // 0.01 default false positive probability
@@ -17,7 +17,7 @@ public class CountingBloomFilter {
     }
 
     public CountingBloomFilter(int n, double p) {       // Quando NÂO é usado o p default
-        initialize();                                   // Automaticamente inicializa B com todos os elementos a 0
+        initialize();                                   
         this.m = 0;
         this.n = n;
         this.p = p;
@@ -25,18 +25,18 @@ public class CountingBloomFilter {
     }
 
     public CountingBloomFilter(int n, int k) {          // Neste caso, a variável p não é necessária
-        initialize();	                                // Automaticamente inicializa B com todos os elementos a 0
+        initialize();	                      
         this.m = 0;
         this.k = k;
         p = Math.pow((1 - Math.exp(-k * (double) n/(double) m)), k); 
     }
 
 
-   public void initialize(){
-   	bloom = new int[n];				// Inicializa o array com todos os elementos a 0.   
-   }
+    public void initialize(){
+        bloom = new int[n];				                // Inicializa o array com todos os elementos a 0.   
+    }
 
-    public boolean isMember(String elemento, int k){           // Membership Test, tem de verificar se cada bucket está a zero
+    public boolean isMember(String elemento, int k){    // Membership Test, tem de verificar se cada bucket está a zero
         int key;
         for (int i = 0; i < k; i++) {
             key = stringToHash(elemento);
@@ -89,7 +89,7 @@ public class CountingBloomFilter {
     }
 
     public int stringToHash(String elemento){
-        int key = elemento.hashCode();
+        int key = (elemento.hashCode() % n);
         return key;
     }
 
