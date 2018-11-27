@@ -162,6 +162,17 @@ public class CountingBloomFilter {
         System.out.println(teste.size());
         System.out.println(teste.getM());
 
+        System.out.println("");
+
+        teste.insert("add1", 3);
+        teste.insert("add2", 3);
+        teste.insert("add3", 3);
+        System.out.println(teste.isMember("add3", 3));
+        System.out.println(teste.size());
+        System.out.println(teste.getM());
+        teste.clearAll();
+        System.out.println(teste.getM());
+
         // RESULTADO EXPECTED:
         // true
         // 1000
@@ -169,6 +180,11 @@ public class CountingBloomFilter {
         // true
         // false
         // 1000
+        // 0
+
+        // true
+        // 1000
+        // 3
         // 0
     }
     // ##########################################################
