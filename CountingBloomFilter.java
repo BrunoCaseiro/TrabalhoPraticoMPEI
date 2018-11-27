@@ -49,9 +49,10 @@ public class CountingBloomFilter {
     }
 
     public void insert(String elemento, int k){                
-        int key;
+        int key = stringToHash(elemento);
+	bloom[key]++;
         for (int i = 0; i < k; i++) {
-           key = stringToHash(elemento);
+           key = stringToHash(Integer.toString(key));
            bloom[key]++;
        }
        m++;
