@@ -9,22 +9,23 @@ public class CountingBloomFilter {
     private int[] bloom;            // Bloom filter array
 
     public CountingBloomFilter(int n){
+        this.n = n;
         initialize();                                   
         this.m = 0;
-        this.n = n;
         p = 0.01;                                       // 0.01 default false positive probability
         k = optimalValueK();
     }
 
     public CountingBloomFilter(int n, double p) {       // Quando NÂO é usado o p default
+        this.n = n;
         initialize();                                   
         this.m = 0;
-        this.n = n;
         this.p = p;
         k = optimalValueK();
     }
 
     public CountingBloomFilter(int n, int k) {          // Neste caso, a variável p não é necessária
+        this.n = n;
         initialize();	                      
         this.m = 0;
         this.k = k;
@@ -154,10 +155,22 @@ public class CountingBloomFilter {
     public static void main(String[] args) {
         CountingBloomFilter teste = new CountingBloomFilter(1000);
         teste.insert("teste", 3);
-        teste.isMember("teste", 3);
-        teste.size();
-        teste.delete("teste", 3);
-        teste.isMember("teste", 3);
+        System.out.println(teste.isMember("teste", 3));
+        System.out.println(teste.size());
+        System.out.println(teste.getM());
+        System.out.println(teste.delete("teste", 3));
+        System.out.println(teste.isMember("teste", 3));
+        System.out.println(teste.size());
+        System.out.println(teste.getM());
+
+        // RESULTADO EXPECTED:
+        // true
+        // 1000
+        // 1
+        // true
+        // false
+        // 1000
+        // 0
     }
     // ##########################################################
 }
