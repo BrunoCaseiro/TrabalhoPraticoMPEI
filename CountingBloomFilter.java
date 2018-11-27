@@ -90,8 +90,7 @@ public class CountingBloomFilter {
     }
 
     public int stringToHash(String elemento){
-        int key = (elemento.hashCode() % n);
-        return key;
+        return (elemento.hashCode() % n);
     }
 
     public int optimalValueK(){                 // https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions            
