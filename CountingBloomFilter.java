@@ -38,28 +38,31 @@ public class CountingBloomFilter {
     }
 
     public boolean isMember(String elemento, int k){    // Membership Test, tem de verificar se cada bucket está a zero
-        int key;
-        for (int i = 0; i < k; i++) {
-            key = stringToHash(elemento);
+        int key = stringToHash(elemento);
+        if(bloom[key] == 0){
+            return false;
+        }
+        for (int i = 0; i < k-1; i++) {
+            key = stringToHash(Integer.toString(key));
             if(bloom[key] == 0){
                 return false;
             }
-        }    
+        }   
         return true;                                                             
     }
 
     public void insert(String elemento, int k){                
         int key = stringToHash(elemento);
-	bloom[key]++;
-        for (int i = 0; i < k; i++) {
+        bloom[key]++;
+        for (int i = 0; i < k-1; i++) {
            key = stringToHash(Integer.toString(key));
            bloom[key]++;
-       }
-       m++;
+        }
+        m++;
     }
     
     public void reset(){           
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < bloom.length; i++) {
             bloom[i]=0;
         }
         m = 0;
@@ -67,12 +70,13 @@ public class CountingBloomFilter {
 
     public boolean delete(String elemento, int k){                // Decrementa todos os buckets do respetivo member
         if(isMember(elemento, k)){
-            int key;
-            for (int i = 0; i < k; i++) {
-                key = stringToHash(elemento);
-                bloom[key]--;
+            int key = stringToHash(elemento);
+            bloom[key]--;
+            for (int i = 0; i < k-1; i++) {
+               key = stringToHash(Integer.toString(key));
+               bloom[key]--;
             }
-            m--; 
+            m--;
             return true;    
         }
         else{
@@ -84,9 +88,9 @@ public class CountingBloomFilter {
         int key = stringToHash(elemento);
         int min = bloom[key];
         
-        for (int i = 1; i < k; i++) {
-            key = stringToHash(elemento);
-            if(min>bloom[key]){
+        for (int i = 0; i < k-1; i++) {
+            key = stringToHash(Integer.toString(key));
+            if(min>=bloom[key]){
                 min = bloom[key];
             }
         }
@@ -94,7 +98,8 @@ public class CountingBloomFilter {
     }
 
     public int stringToHash(String elemento){
-        return (elemento.hashCode() % n);
+        int key = (elemento.hashCode() % n);
+        return key;
     }
 
     public int optimalValueK(){                 // https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions            
@@ -147,6 +152,11 @@ public class CountingBloomFilter {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(n, k, m, p, bloom);
+    }
+
+    @Override
     public String toString() {
         return "{" + " n='" + size() + "'" + ", k='" + getK() + "'" + ", m='" + getM() + "'" + ", p='" + getP() + "'" + ", bloom='" + getBloomToString() + "'" + "}";
     }
@@ -169,15 +179,27 @@ public class CountingBloomFilter {
         System.out.println("");
 
         teste.insert("add1", 3);
+        System.out.println(teste.count("add1"));
         teste.insert("add2", 3);
         teste.insert("add3", 3);
+        teste.insert("add1", 3);                    // AGAIN 2x
+        System.out.println(teste.count("add1"));   
+        teste.insert("add1", 3);                    // AGAIN 3x
+        teste.insert("add1", 3);                    // AGAIN 4x
+        System.out.println(teste.count("add1"));    
         System.out.println(teste.isMember("add3", 3));
         System.out.println(teste.size());
         System.out.println(teste.getM());
+
+        System.out.println("");
         teste.reset();
+
         System.out.println(teste.isMember("add1", 3));
+        System.out.println(teste.count("add1"));
         System.out.println(teste.isMember("add2", 3));
         System.out.println(teste.isMember("add3", 3));
+        System.out.println(teste.count("add3"));
+        System.out.println(teste.size());
         System.out.println(teste.getM());
         System.out.println(teste.getBloomToString());
 
@@ -190,9 +212,19 @@ public class CountingBloomFilter {
         // 1000
         // 0
 
+        // 1
+        // 2
+        // 4
         // true
         // 1000
-        // 3
+        // 3            A contar os repetidos (?)
+
+        // false
+        // 0
+        // false
+        // false
+        // 0
+        // 1000
         // 0
         // Todos os slots do bloom filter (0 até n-1) têm de ser 0
     }
