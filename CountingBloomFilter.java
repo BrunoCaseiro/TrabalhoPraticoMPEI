@@ -9,7 +9,7 @@ public class CountingBloomFilter {
     private int[] bloom;            // Bloom filter array
 
     public CountingBloomFilter(int n){
-        bloom = new int[n];                             // Automaticamente inicializa B com todos os elementos a 0
+        initialize();                                   // Automaticamente inicializa B com todos os elementos a 0
         this.m = 0;
         this.n = n;
         p = 0.01;                                       // 0.01 default false positive probability
@@ -17,7 +17,7 @@ public class CountingBloomFilter {
     }
 
     public CountingBloomFilter(int n, double p) {       // Quando NÂO é usado o p default
-        bloom = new int[n];                             // Automaticamente inicializa B com todos os elementos a 0
+        initialize();                                   // Automaticamente inicializa B com todos os elementos a 0
         this.m = 0;
         this.n = n;
         this.p = p;
@@ -25,16 +25,16 @@ public class CountingBloomFilter {
     }
 
     public CountingBloomFilter(int n, int k) {          // Neste caso, a variável p não é necessária
-        bloom = new int[n];                             // Automaticamente inicializa B com todos os elementos a 0
+        initialize();	                                // Automaticamente inicializa B com todos os elementos a 0
         this.m = 0;
         this.k = k;
         p = Math.pow((1 - Math.exp(-k * (double) n/(double) m)), k); 
     }
 
-    // Removida funcao de inicializar o array, visto que ja nao necessitamos 
-    // A inicializacao do array deve ser feita no construtor
-    // public void initialize(){
-    // }
+
+   public void initialize(){
+   	bloom = new int[n];				// Inicializa o array com todos os elementos a 0.   
+   }
 
     public boolean isMember(String elemento, int k){           // Membership Test, tem de verificar se cada bucket está a zero
         int key;
