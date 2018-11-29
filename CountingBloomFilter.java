@@ -1,4 +1,6 @@
-//Foi extraída bastante informação dos slides das TPs
+// Foi extraída bastante informação dos slides das TPs
+// Algumas funções são repetidas com a variante da stringToHash: stringToHash, stringToHashOne
+// Estas duas últimas foram criadas por nós
 import java.util.*;
 
 public class CountingBloomFilter {
@@ -51,6 +53,20 @@ public class CountingBloomFilter {
         return true;                                                             
     }
 
+    public boolean isMemberOne(String elemento, int k) { // Membership Test, tem de verificar se cada bucket está a zero
+        int key = stringToHashOne(elemento);
+        if (bloom[key] == 0) {
+            return false;
+        }
+        for (int i = 0; i < k - 1; i++) {
+            key = stringToHashOne(Integer.toString(key));
+            if (bloom[key] == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void insert(String elemento, int k){                
         int key = stringToHash(elemento);
         bloom[key]++;
@@ -84,6 +100,21 @@ public class CountingBloomFilter {
         }                                         
     }
 
+    public boolean deleteOne(String elemento, int k) { // Decrementa todos os buckets do respetivo member
+        if (isMemberOne(elemento, k)) {
+            int key = stringToHashOne(elemento);
+            bloom[key]--;
+            for (int i = 0; i < k - 1; i++) {
+                key = stringToHashOne(Integer.toString(key));
+                bloom[key]--;
+            }
+            m--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public int count(String elemento){                 // Ir buscar os buckets do elemento e ficar com o menor valor
         int key = stringToHash(elemento);
         int min = bloom[key];
@@ -97,9 +128,43 @@ public class CountingBloomFilter {
         return min;
     }
 
+    public int countOne(String elemento) { // Ir buscar os buckets do elemento e ficar com o menor valor
+        int key = stringToHashOne(elemento);
+        int min = bloom[key];
+
+        for (int i = 0; i < k - 1; i++) {
+            key = stringToHashOne(Integer.toString(key));
+            if (min >= bloom[key]) {
+                min = bloom[key];
+            }
+        }
+        return min;
+    }
+
     public int stringToHash(String elemento){
         int key = (elemento.hashCode() % n);
         return key;
+    }
+
+
+    public void insertOne(String elemento, int k) {                  // Utiliza stringToHashOne
+        int key = stringToHashOne(elemento);
+        bloom[key]++;
+        for (int i = 0; i < k - 1; i++) {
+            key = stringToHashOne(Integer.toString(key));
+            bloom[key]++;
+        }
+        m++;
+    }
+
+
+    public int stringToHashOne(String elemento) {               // HashFunction criada por nós
+        int key = 0;
+
+        for (int i = 0; i < elemento.length(); i++) {
+            key = key + (int) elemento.charAt(i);               // Soma os asciis de todos os chars na string
+        }
+        return (key * elemento.length()) % n;                    // Multiplica o resultado pelo número de códigos
     }
 
     public int optimalValueK(){                 // https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions            
@@ -167,37 +232,37 @@ public class CountingBloomFilter {
 	// For test purposes only
     public static void main(String[] args) {
         CountingBloomFilter teste = new CountingBloomFilter(1000);
-        teste.insert("teste", 3);
-        System.out.println(teste.isMember("teste", 3));
+        teste.insertOne("teste", 3);
+        System.out.println(teste.isMemberOne("teste", 3));
         System.out.println(teste.size());
         System.out.println(teste.getM());
-        System.out.println(teste.delete("teste", 3));
-        System.out.println(teste.isMember("teste", 3));
+        System.out.println(teste.deleteOne("teste", 3));
+        System.out.println(teste.isMemberOne("teste", 3));
         System.out.println(teste.size());
         System.out.println(teste.getM());
 
         System.out.println("");
 
-        teste.insert("add1", 3);
-        System.out.println(teste.count("add1"));
-        teste.insert("add2", 3);
-        teste.insert("add3", 3);
-        teste.insert("add1", 3);                    // AGAIN 2x
-        System.out.println(teste.count("add1"));   
-        teste.insert("add1", 3);                    // AGAIN 3x
-        teste.insert("add1", 3);                    // AGAIN 4x
-        System.out.println(teste.count("add1"));    
-        System.out.println(teste.isMember("add3", 3));
+        teste.insertOne("add1", 3);
+        System.out.println(teste.countOne("add1"));
+        teste.insertOne("add2", 3);
+        teste.insertOne("add3", 3);
+        teste.insertOne("add1", 3);                    
+        System.out.println(teste.countOne("add1"));   
+        teste.insertOne("add1", 3);                    
+        teste.insertOne("add1", 3);                   
+        System.out.println(teste.countOne("add1"));    
+        System.out.println(teste.isMemberOne("add3", 3));
         System.out.println(teste.size());
         System.out.println(teste.getM());
 
         System.out.println("");
         teste.reset();
 
-        System.out.println(teste.isMember("add1", 3));
-        System.out.println(teste.count("add1"));
-        System.out.println(teste.isMember("add2", 3));
-        System.out.println(teste.isMember("add3", 3));
+        System.out.println(teste.isMemberOne("add1", 3));
+        System.out.println(teste.countOne("add1"));
+        System.out.println(teste.isMemberOne("add2", 3));
+        System.out.println(teste.isMemberOne("add3", 3));
         System.out.println(teste.count("add3"));
         System.out.println(teste.size());
         System.out.println(teste.getM());
@@ -217,7 +282,7 @@ public class CountingBloomFilter {
         // 4
         // true
         // 1000
-        // 3            A contar os repetidos (?)
+        // 6            Conta total
 
         // false
         // 0
