@@ -103,9 +103,12 @@ public class MinHash{
         // "alfa", "lfac", "face", "ace_", "ce_c", "e_co", "_com", "com_", "om_C", "m_Co", "_Cou", "Couv", ""ouve" "uves"
         // "pa", "ap", "pa", "ai", "ia"
         // "reb", "ebe", "ben", "ent", "nto", "tos", "os_", "s_d", "_de", "de_", "e_s", "_so", "soj", "oja"
+        // "a", "b", "c", "d"
+        // "--------------------------------------------------"
         // "the quick", "quick brown", "brown fox", "fox jumps", "jumps over", "over the", "the lazy", "lazy dog"
         // "estou sem ideias", "sem ideias para", "ideias para pôr", "para pôr aqui"
         // "o bruno caseiro é", "bruno caseiro é bonito", "caseiro é bonito e", "é bonito e vai", "bonitos e vai ter", "e vai ter boa", "vai ter boa nota", "ter boa nota neste", "boa nota neste projeto"
+        // "uma", "word", "de", "cada", "vez"
     }
     // ##########################################################
 }
