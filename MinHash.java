@@ -17,12 +17,12 @@ public class MinHash{
         boolean end = false;
 
         while(!end){
-            if (ss >= s.length()){
-                end = true;
+            if (ss >= s.length()){                                      // se o k der out of bounds ele apenas
+                end = true;                                             // adiciona o resto da string argumento
                 shingles.add(s.substring(ss-k, s.length()));
             }
-            else{
-                shingles.add(s.substring(ss - k, ss));
+            else{                                                       // adiciona ao arraylist substrings de
+                shingles.add(s.substring(ss - k, ss));                  // k em k chars
             }
 
             ss += 1;                                      
