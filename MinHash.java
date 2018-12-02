@@ -19,9 +19,7 @@ public class MinHash{
 
     public int getK(){
         return k;
-    }
-
-    
+    } 
 
     public ArrayList<String> charShingle(String s) {
         int ss = n;                                                     // ss = shingleSize
