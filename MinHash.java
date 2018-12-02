@@ -80,6 +80,7 @@ public class MinHash{
     // For test purposes only
 
     public static void main(String[] args) {
+        MinHash x1 = new MinHash(1);
         MinHash x2 = new MinHash(2);
         MinHash x3 = new MinHash(3);
         MinHash x4 = new MinHash(4);
@@ -88,10 +89,12 @@ public class MinHash{
         System.out.println(x4.charShingle("alface Com Couves"));
         System.out.println(x2.charShingle("papaia"));
         System.out.println(x3.charShingle("rebentos de soja"));
+        System.out.println(x1.charShingle("abc"));
         System.out.println("--------------------------------------------------");
         System.out.println(x2.wordShingle("the quick brown fox jumps over the lazy dog"));
         System.out.println(x3.wordShingle("estou sem ideias para pôr aqui"));
-        System.out.println(x4.wordShingle("o bruno caseiro é bonito e vai ter boa nota a mpei"));       
+        System.out.println(x4.wordShingle("o bruno caseiro é bonito e vai ter boa nota neste projeto"));     
+        System.out.println(x1.wordShingle("uma word de cada vez"));  
         
         
         // RESULTADO ESPERADO:
@@ -102,7 +105,7 @@ public class MinHash{
         // "reb", "ebe", "ben", "ent", "nto", "tos", "os_", "s_d", "_de", "de_", "e_s", "_so", "soj", "oja"
         // "the quick", "quick brown", "brown fox", "fox jumps", "jumps over", "over the", "the lazy", "lazy dog"
         // "estou sem ideias", "sem ideias para", "ideias para pôr", "para pôr aqui"
-        // "o bruno caseiro é", "bruno caseiro é bonito", "caseiro é bonito e", "é bonito e vai", "bonitos e vai ter", "e vai ter boa", "vai ter boa nota", "ter boa nota a", "boa nota a mpei"
+        // "o bruno caseiro é", "bruno caseiro é bonito", "caseiro é bonito e", "é bonito e vai", "bonitos e vai ter", "e vai ter boa", "vai ter boa nota", "ter boa nota neste", "boa nota neste projeto"
     }
     // ##########################################################
 }
