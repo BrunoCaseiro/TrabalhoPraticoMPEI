@@ -3,10 +3,13 @@ import java.util.*;
 public class MinHash{
     private int n;                                         // n-shingle
     private int k = 100;                                   // k hash functions
+    private ;                                              // FAZER UM MAPA TIPO MATRIX SETSxSHINGLES
 
+    // Constructors, Getters, Setters
     public MinHash(int n, int k){                          // hash functions number pode ou não ser definido
         this.n = n;
         this.k = k;
+        
     }
 
     public MinHash(int n) {
@@ -21,6 +24,7 @@ public class MinHash{
         return k;
     } 
 
+    // Shingling
     public ArrayList<String> charShingle(String s) {
         int ss = n;                                                     // ss = shingleSize
         ArrayList<String> shingles = new ArrayList<String>();
@@ -72,6 +76,15 @@ public class MinHash{
         shingles.remove(shingles.size()-1);
         return shingles;
     }
+
+    // minHash
+    public void addToMatrix(ArrayList<String> shingle){
+        hashMatrix
+
+
+
+    }
+
         
 
     // ##########################################################
