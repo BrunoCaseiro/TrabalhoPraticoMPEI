@@ -3,15 +3,22 @@ import java.util.*;
 public class MinHash{
     private int n;                                         // n-shingle
     private int k = 100;                                   // k hash functions
+    private static int[][] matrix;                               
+    private static ArrayList<ArrayList<String>> setSaver;              // Guarda todos os arraylists "shingles"
+    private static ArrayList<String> shingleSaver;
 
     // Constructors, Getters, Setters
     public MinHash(int n, int k){                          // hash functions number pode ou não ser definido
         this.n = n;
         this.k = k;
+        setSaver = new ArrayList<ArrayList<String>>();
+        shingleSaver = new ArrayList<String>();
     }
 
     public MinHash(int n) {
         this.n = n;
+        setSaver = new ArrayList<ArrayList<String>>();
+        shingleSaver = new ArrayList<String>();
     }
 
     public int getN(){
@@ -38,6 +45,13 @@ public class MinHash{
             }
 
             ss += 1;                                      
+        }
+        setSaver.add(shingles);
+
+        for (int i = 0; i < shingles.size(); i++) {                 // Guarda todos os shingles novos
+            if (!shingleSaver.contains(shingles.get(i))) {
+                shingleSaver.add(shingles.get(i));
+            }
         }
         return shingles;
     }
@@ -72,13 +86,32 @@ public class MinHash{
             }
         }
         shingles.remove(shingles.size()-1);
+        setSaver.add(shingles);
+
+        for (int i = 0; i < shingles.size(); i++) {                 // Guarda todos os shingles novos
+            if(!shingleSaver.contains(shingles.get(i))){
+                shingleSaver.add(shingles.get(i));
+            }
+        }
         return shingles;
     }
 
-    // minHash
-    
-
+    // Matrix
+    public static void updateMatrix(){
+        matrix = new int[setSaver.size()][shingleSaver.size()];
+        for (int i = 0; i < setSaver.size(); i++) {
+            for (int j = 0; j < shingleSaver.size(); j++) {
+                if(setSaver.get(i).contains(shingleSaver.get(j))){
+                    matrix[i][j] = 1;
+                }
+                else{
+                    matrix[i][j] = 0;
+                }
+            }
+        }
         
+    }
+       
 
     // ##########################################################
     // For test purposes only
@@ -99,6 +132,13 @@ public class MinHash{
         System.out.println(x3.wordShingle("estou sem ideias para pôr aqui"));
         System.out.println(x4.wordShingle("o bruno caseiro é bonito e vai ter boa nota neste projeto"));     
         System.out.println(x1.wordShingle("uma word de cada vez"));  
+        System.out.println("--------------------------------------------------");
+        System.out.println(setSaver);
+        System.out.println(shingleSaver);
+        updateMatrix();
+        printMatrix();
+
+
         
         
         // RESULTADO ESPERADO:
@@ -113,6 +153,9 @@ public class MinHash{
         // "estou sem ideias", "sem ideias para", "ideias para pôr", "para pôr aqui"
         // "o bruno caseiro é", "bruno caseiro é bonito", "caseiro é bonito e", "é bonito e vai", "bonitos e vai ter", "e vai ter boa", "vai ter boa nota", "ter boa nota neste", "boa nota neste projeto"
         // "uma", "word", "de", "cada", "vez"
+        // "--------------------------------------------------"
+        // "Print de todos os shingles por set"
+        // "Print de todos os shingles únicos"
     }
     // ##########################################################
 }
