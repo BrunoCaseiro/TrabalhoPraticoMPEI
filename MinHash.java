@@ -1,8 +1,10 @@
 import java.util.*;
 
 public class MinHash{
-    private int n;                                         // n-shingle
-    private int k = 100;                                   // k hash functions
+    private int n;                                                  // n-shingle
+    private static int k = 100;                                   // k hash functions, 100 por default
+    private double e;                                      // Expected error
+    private static int[] a, b;                             // guarda valores a, b a ser usados em todas as uniHash
     private static int[][] matrix;                               
     private static ArrayList<ArrayList<String>> setSaver;  // Guarda todos os arraylists "shingles"
     private static ArrayList<String> shingleSaver;
@@ -11,14 +13,53 @@ public class MinHash{
     public MinHash(int n, int k){                          // hash functions number pode ou não ser definido
         this.n = n;
         this.k = k;
+        e = Math.sqrt(1/k);                                // k = O(1/e²)
         setSaver = new ArrayList<ArrayList<String>>();
         shingleSaver = new ArrayList<String>();
+        a = new int[k];
+        b = new int[k];
+
+        for (int i = 0; i < k; i++) {
+            a[i] = (int) Math.floor(Math.random() * 100);         // gera k random ints de 0 a 100 para a
+            b[i] = (int) Math.floor(Math.random() * 100);         // gera k random ints de 0 a 100 para b
+        }
     }
 
-    public MinHash(int n) {
+    public MinHash(int n){
         this.n = n;
+        e = 0.1;                                             // e = sqrt(1/k), manipulando a equação
         setSaver = new ArrayList<ArrayList<String>>();
         shingleSaver = new ArrayList<String>();
+        a = new int[k];
+        b = new int[k];
+
+        for (int i = 0; i < k; i++) {
+            a[i] = (int) Math.floor(Math.random() * 100); // gera k random ints de 0 a 100 para a
+            b[i] = (int) Math.floor(Math.random() * 100); // gera k random ints de 0 a 100 para b
+        }
+    }
+
+    public MinHash(int n, double e){
+        this.n = n;
+
+        if(0 < e && e < 1){
+            this.e = e;
+        }
+        else{
+            System.out.print("Please insert a valid 'e'");
+            System.exit(0);
+        }
+
+        k = (int) (1/Math.pow(e,2));                                // o valor é arredondado sempre para baixo
+        setSaver = new ArrayList<ArrayList<String>>();              // parecido ao método floor()
+        shingleSaver = new ArrayList<String>();
+        a = new int[k];
+        b = new int[k];
+
+        for (int i = 0; i < k; i++) {
+            a[i] = (int) Math.floor(Math.random() * 100); // gera k random ints de 0 a 100 para a
+            b[i] = (int) Math.floor(Math.random() * 100); // gera k random ints de 0 a 100 para b
+        }
     }
 
     public int getN(){
@@ -28,6 +69,18 @@ public class MinHash{
     public int getK(){
         return k;
     } 
+
+    public double getE(){
+        return e;
+    }
+
+    public ArrayList<ArrayList<String>> setSaver(){
+        return setSaver;
+    }
+
+    public ArrayList<String> shingleSaver(){
+        return shingleSaver;
+    }
 
     // Shingling
     public ArrayList<String> charShingle(String s) {
@@ -112,8 +165,8 @@ public class MinHash{
         
     }
 
-    // Jaccard
-    public static double JaccardSimilarity(int set1, int set2){          // são pedidos os sets a comparar,
+    // Jaccard w/o minHash
+    public static double JSim(int set1, int set2){          // são pedidos os sets a comparar,
         set1 -= 1;                                                      // ex.: primeiro set e terceiro set
         set2 -= 1;                                                      // set = 1 (indice 0), set2 = 3 (indice 2)
         double union = 0;
@@ -133,8 +186,62 @@ public class MinHash{
         return (intersection/union);                                                  
     }                                                                   
                                                                         
-    public static double JaccardDistance(int set1, int set2){
-        return 1-JaccardSimilarity(set1, set2);
+    public static double JDis(int set1, int set2){
+        return 1-JSim(set1, set2);
+    }
+
+    // minHash
+    public static int getSignature(int set){
+        int[] column = getCol(set);
+        String signature = "";
+        int min = 11;                // valor mínimo inicial, qql valor da universalHash é menor que 11
+    
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < column.length; j++) {
+                if(uniHash(column[j], a[i], b[i]) < min){
+                    min = uniHash(column[j], a[i], a[i]);               // é sempre usada a hashFunction i
+                }
+            }
+            signature += Integer.toString(min);
+        }
+        return Integer.parseInt(signature);
+    }
+
+    public static int uniHash(int shingle, int a, int b){
+        int p = 11;                                     // número primo > n
+        int n = 10;                                     // valor máximo de um algarismo da signature
+       
+        return (((a * shingle) % p) % n);
+    }
+
+    public static int[] getCol(int set){
+        set -=1;
+        int[] column = new int[shingleSaver.size()];
+
+        for (int i = 0; i < shingleSaver.size(); i++) {
+            column[i] = matrix[set][i];
+        }
+
+        return column;
+    }
+
+    // Jaccard w/ minHash
+    public static double JSimMH(int set1, int set2){
+        double common = 0;
+        String one = Integer.toString(getSignature(set1));
+        String two = Integer.toString(getSignature(set2));
+
+        for (int i = 0; i < k; i++) {
+            if(one.charAt(i) == two.charAt(i)){
+                common++;
+            }
+        }
+
+        return common/k;
+    }
+
+    public static double JDisMH(int set1, int set2){
+        return 1-JSimMH(set1, set2);
     }
        
 
@@ -161,7 +268,6 @@ public class MinHash{
         System.out.println(x1.wordShingle("three four five"));  
         System.out.println(x1.wordShingle("a distancia vai ser 0 e a similarity 1"));
         System.out.println(x1.wordShingle("a distancia vai ser 0 e a similarity 1"));
-
         System.out.println("--------------------------------------------------");
         System.out.println(setSaver);
         System.out.println(shingleSaver);
@@ -170,12 +276,21 @@ public class MinHash{
         System.out.println(matrix[2][0] == 0);
         System.out.println(matrix[4][26] == 1);
         System.out.println(matrix[4][19] == 0);
-        System.out.println(JaccardSimilarity(1,2));
-        System.out.println(JaccardDistance(1,2));
-        System.out.println(JaccardSimilarity(11,12));
-        System.out.println(JaccardDistance(11, 12));
-        System.out.println(JaccardSimilarity(13,14));
-        System.out.println(JaccardDistance(13,14));
+        System.out.println("SEM MINHASH");
+        System.out.println(JSim(1,2));
+        System.out.println(JDis(1,2));
+        System.out.println(JSim(11,12));
+        System.out.println(JDis(11, 12));
+        System.out.println(JSim(13,14));
+        System.out.println(JDis(13,14));
+        System.out.println("--------------------------------------------------");
+        System.out.println("COM MINHASH");
+        System.out.println(JSimMH(1, 2));
+        System.out.println(JDisMH(1, 2));
+        System.out.println(JSimMH(11, 12));
+        System.out.println(JDisMH(11, 12));
+        System.out.println(JSimMH(13, 14));
+        System.out.println(JDisMH(13, 14));
 
 
 
@@ -200,6 +315,13 @@ public class MinHash{
         // true
         // true
         // true
+        // 0
+        // 1
+        // 0.20
+        // 0.80
+        // 1
+        // 0
+        // "--------------------------------------------------"
         // 0
         // 1
         // 0.20
