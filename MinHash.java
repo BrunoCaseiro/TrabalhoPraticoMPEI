@@ -4,7 +4,7 @@ public class MinHash{
     private int n;                                         // n-shingle
     private int k = 100;                                   // k hash functions
     private static int[][] matrix;                               
-    private static ArrayList<ArrayList<String>> setSaver;              // Guarda todos os arraylists "shingles"
+    private static ArrayList<ArrayList<String>> setSaver;  // Guarda todos os arraylists "shingles"
     private static ArrayList<String> shingleSaver;
 
     // Constructors, Getters, Setters
@@ -111,6 +111,31 @@ public class MinHash{
         }
         
     }
+
+    // Jaccard
+    public static double JaccardSimilarity(int set1, int set2){          // são pedidos os sets a comparar,
+        set1 -= 1;                                                      // ex.: primeiro set e terceiro set
+        set2 -= 1;                                                      // set = 1 (indice 0), set2 = 3 (indice 2)
+        double union = 0;
+        double intersection = 0;
+
+        for (int i = 0; i < shingleSaver.size(); i++) {                      
+            if(setSaver.get(set1).contains(shingleSaver.get(i)) && setSaver.get(set2).contains(shingleSaver.get(i))){
+                intersection++;
+                union++;
+            }
+            else{
+                if(setSaver.get(set1).contains(shingleSaver.get(i)) || setSaver.get(set2).contains(shingleSaver.get(i))){
+                    union++;
+                }
+            }
+        }        
+        return (intersection/union);                                                  
+    }                                                                   
+                                                                        
+    public static double JaccardDistance(int set1, int set2){
+        return 1-JaccardSimilarity(set1, set2);
+    }
        
 
     // ##########################################################
@@ -131,12 +156,27 @@ public class MinHash{
         System.out.println(x2.wordShingle("the quick brown fox jumps over the lazy dog"));
         System.out.println(x3.wordShingle("estou sem ideias para pôr aqui"));
         System.out.println(x4.wordShingle("o bruno caseiro é bonito e vai ter boa nota neste projeto"));     
-        System.out.println(x1.wordShingle("uma word de cada vez"));  
+        System.out.println(x1.wordShingle("uma word de cada vez"));
+        System.out.println(x1.wordShingle("one two three"));
+        System.out.println(x1.wordShingle("three four five"));  
+        System.out.println(x1.wordShingle("a distancia vai ser 0 e a similarity 1"));
+        System.out.println(x1.wordShingle("a distancia vai ser 0 e a similarity 1"));
+
         System.out.println("--------------------------------------------------");
         System.out.println(setSaver);
         System.out.println(shingleSaver);
         updateMatrix();
-        printMatrix();
+        System.out.println(matrix[0][0] == 1);
+        System.out.println(matrix[2][0] == 0);
+        System.out.println(matrix[4][26] == 1);
+        System.out.println(matrix[4][19] == 0);
+        System.out.println(JaccardSimilarity(1,2));
+        System.out.println(JaccardDistance(1,2));
+        System.out.println(JaccardSimilarity(11,12));
+        System.out.println(JaccardDistance(11, 12));
+        System.out.println(JaccardSimilarity(13,14));
+        System.out.println(JaccardDistance(13,14));
+
 
 
         
@@ -156,6 +196,17 @@ public class MinHash{
         // "--------------------------------------------------"
         // "Print de todos os shingles por set"
         // "Print de todos os shingles únicos"
+        // true
+        // true
+        // true
+        // true
+        // 0
+        // 1
+        // 0.20
+        // 0.80
+        // 1
+        // 0
+
     }
     // ##########################################################
 }
