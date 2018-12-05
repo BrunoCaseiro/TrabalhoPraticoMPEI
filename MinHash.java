@@ -2,11 +2,11 @@ import java.util.*;
 
 public class MinHash{
     private int n;                                                  // n-shingle
-    private static int k = 100;                                   // k hash functions, 100 por default
+    private static int k = 5;                                   // k hash functions, 5 por default
     private double e;                                      // Expected error
     private static int[] a, b;                             // guarda valores a, b a ser usados em todas as uniHash
     private static int[][] matrix;                               
-    private static ArrayList<ArrayList<String>> setSaver;  // Guarda todos os arraylists "shingles"
+    private static ArrayList<ArrayList<String>> setSaver;  // Guarda todos os arraylists com shingles (sets)
     private static ArrayList<String> shingleSaver;
 
     // Constructors, Getters, Setters
@@ -20,8 +20,8 @@ public class MinHash{
         b = new int[k];
 
         for (int i = 0; i < k; i++) {
-            a[i] = (int) Math.floor(Math.random() * 100);         // gera k random ints de 0 a 100 para a
-            b[i] = (int) Math.floor(Math.random() * 100);         // gera k random ints de 0 a 100 para b
+            a[i] = (int) Math.floor(Math.random() * 20);         // gera k random ints de 0 a 20 para a
+            b[i] = (int) Math.floor(Math.random() * 20);         // gera k random ints de 0 a 20 para b
         }
     }
 
@@ -34,8 +34,8 @@ public class MinHash{
         b = new int[k];
 
         for (int i = 0; i < k; i++) {
-            a[i] = (int) Math.floor(Math.random() * 100); // gera k random ints de 0 a 100 para a
-            b[i] = (int) Math.floor(Math.random() * 100); // gera k random ints de 0 a 100 para b
+            a[i] = (int) Math.floor(Math.random() * 20); // gera k random ints de 0 a 20 para a
+            b[i] = (int) Math.floor(Math.random() * 20); // gera k random ints de 0 a 20 para b
         }
     }
 
@@ -57,8 +57,8 @@ public class MinHash{
         b = new int[k];
 
         for (int i = 0; i < k; i++) {
-            a[i] = (int) Math.floor(Math.random() * 100); // gera k random ints de 0 a 100 para a
-            b[i] = (int) Math.floor(Math.random() * 100); // gera k random ints de 0 a 100 para b
+            a[i] = (int) Math.floor(Math.random() * 20); // gera k random ints de 0 a 20 para a
+            b[i] = (int) Math.floor(Math.random() * 20); // gera k random ints de 0 a 20 para b
         }
     }
 
@@ -191,53 +191,47 @@ public class MinHash{
     }
 
     // minHash
-    public static int getSignature(int set){
-        int[] column = getCol(set);
+    public static long getSignature(int set){
+        ArrayList<String> sets = setSaver.get(set-1);      // Busca o arrayList correspondente ao set desejado
+        int min = 999999999;                // valor mínimo inicial, qql valor da universalHash é menor 
         String signature = "";
-        int min = 11;                // valor mínimo inicial, qql valor da universalHash é menor que 11
-    
+
         for (int i = 0; i < k; i++) {
-            for (int j = 0; j < column.length; j++) {
-                if(uniHash(column[j], a[i], b[i]) < min){
-                    min = uniHash(column[j], a[i], a[i]);               // é sempre usada a hashFunction i
+            for (int j = 0; j < sets.size(); j++) {
+                if(uniHash(sets.get(j).hashCode(), a[i], b[i]) < min){ 
+                    min = uniHash(sets.get(j).hashCode(), a[i], b[i]);      // é sempre usada a hashFunction i
                 }
             }
-            signature += Integer.toString(min);
-        }
-        return Integer.parseInt(signature);
-    }
-
-    public static int uniHash(int shingle, int a, int b){
-        int p = 11;                                     // número primo > n
-        int n = 10;                                     // valor máximo de um algarismo da signature
-       
-        return (((a * shingle) % p) % n);
-    }
-
-    public static int[] getCol(int set){
-        set -=1;
-        int[] column = new int[shingleSaver.size()];
-
-        for (int i = 0; i < shingleSaver.size(); i++) {
-            column[i] = matrix[set][i];
+            signature += min;
         }
 
-        return column;
+        signature = signature.replaceAll("[^\\d]", "");   
+        long x = Long.parseLong(signature);
+
+        return x;
+    }
+
+    public static int uniHash(int id, int a, int b){
+        int n = 37;                                 // número primo
+        int p = 31;                                 // número primo
+        return (((a*id + b) % p) %n);              
     }
 
     // Jaccard w/ minHash
     public static double JSimMH(int set1, int set2){
         double common = 0;
-        String one = Integer.toString(getSignature(set1));
-        String two = Integer.toString(getSignature(set2));
+        String one = Long.toString(getSignature(set1));
+        String two = Long.toString(getSignature(set2));
+        double kk = (double) k;
 
         for (int i = 0; i < k; i++) {
             if(one.charAt(i) == two.charAt(i)){
                 common++;
             }
         }
-
-        return common/k;
+        
+        double similarity = common/kk;
+        return similarity;
     }
 
     public static double JDisMH(int set1, int set2){
@@ -296,7 +290,7 @@ public class MinHash{
 
         
         
-        // RESULTADO ESPERADO:
+        // RESULTADO ESPERADO (ou provavel, para a secção "COM MINHASH"):
         // "ab", "bc", "cd"
         // "tom", "oma", "mat", "ate"
         // "alfa", "lfac", "face", "ace_", "ce_c", "e_co", "_com", "com_", "om_C", "m_Co", "_Cou", "Couv", ""ouve" "uves"
@@ -315,6 +309,7 @@ public class MinHash{
         // true
         // true
         // true
+        // SEM MINHASH
         // 0
         // 1
         // 0.20
@@ -322,6 +317,7 @@ public class MinHash{
         // 1
         // 0
         // "--------------------------------------------------"
+        // COM MINHASH
         // 0
         // 1
         // 0.20
