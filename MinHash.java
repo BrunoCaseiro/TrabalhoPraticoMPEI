@@ -212,7 +212,7 @@ public class MinHash{
     }
 
     public static int uniHash(int id, int a, int b){
-        int n = 37;                                 // número primo
+        int n = 10;                                 // número primo
         int p = 31;                                 // número primo
         return (((a*id + b) % p) %n);              
     }
