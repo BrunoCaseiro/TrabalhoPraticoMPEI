@@ -194,15 +194,16 @@ public class MinHash {
     public static ArrayList<Integer> getSignature(int set){
         set -= 1;
         ArrayList<String> sets = setSaver.get(set);      // Busca o arrayList correspondente ao set desejado
-        int min = 999999999;                // valor mínimo inicial, qql valor da universalHash é menor 
+        int min;                                    // valor mínimo inicial, qql valor da universalHash é menor 
         ArrayList<Integer> signature = new ArrayList<Integer>();
         int id;        
 
         for (int i = 0; i < k; i++) {
+            min = 9999999;
             for (int j = 0; j < sets.size(); j++) {
                 id = shingleSaver.indexOf(sets.get(j)) + 100;   // +100 para que id > a && id > b
                 if(uniHash(id, a[i], b[i]) < min){
-                    min = uniHash(id, a[i], b[i]);     
+                    min = uniHash(id, a[i], b[i]);        // ENCONTRA DEMASIADOS VALORES = 0
                 }
             }
             signature.add(min);
