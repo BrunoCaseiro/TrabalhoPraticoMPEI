@@ -35,7 +35,7 @@ public class ContadorEstocastico{
 
 	@Override
 	public String toString() {
-		return "Contador: " + n + " , Probabilidade: " + probAdd;
+		return "Counter: " + n + " , Probability of adding next element: " + probAdd;
 	}
 
 	// ##########################################################

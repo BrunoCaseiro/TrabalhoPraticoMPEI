@@ -36,7 +36,7 @@ public class CountingBloomFilter {
 
 
     public void initialize(){
-        bloom = new int[n];				                // Inicializa o array com todos os elementos a 0.   
+        bloom = new int[this.n];				            // Inicializa o array com todos os elementos a 0.   
     }
 
     public boolean isMember(String elemento, int k){    // Membership Test, tem de verificar se cada bucket está a zero
@@ -143,7 +143,7 @@ public class CountingBloomFilter {
 
     public int stringToHash(String elemento){
         int key = (elemento.hashCode() % n);
-        return key;
+        return Math.abs(key);
     }
 
 
@@ -164,7 +164,7 @@ public class CountingBloomFilter {
         for (int i = 0; i < elemento.length(); i++) {
             key = key + (int) elemento.charAt(i);               // Soma os asciis de todos os chars na string
         }
-        return (key * elemento.length()) % n;                    // Multiplica o resultado pelo número de códigos
+        return Math.abs((key * elemento.length()) % n);                    // Multiplica o resultado pelo número de códigos
     }
 
     public int optimalValueK(){                 // https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions            
