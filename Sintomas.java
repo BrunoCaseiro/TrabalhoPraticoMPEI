@@ -41,9 +41,9 @@ public class Sintomas{
 
                 for (int i = 2; i < x.setSaver().size(); i++){
                     if(x.JSimMH(1, i) > JSmax){
-                    JSmax = x.JSimMH(1,i);
-                    index = i;
-                }
+                        JSmax = x.JSimMH(1,i);
+                        index = i;
+                    }
                 }
 
 
@@ -59,7 +59,7 @@ public class Sintomas{
             }
 
             else if(choice == 3){
-
+                //histograma goes here
             }
 
             else if(choice == 4){
