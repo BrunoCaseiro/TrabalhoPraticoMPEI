@@ -33,9 +33,12 @@ public class ContadorEstocastico{
 		return probAdd;
 	}
 
-	@Override
-	public String toString() {
-		return "Counter: " + n + " , Probability of adding next element: " + probAdd;
+	public String primeiraToString() {
+		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements: " + 2*n;
+	}
+
+	public String segundaToString() {
+		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements: " + 2 * n;
 	}
 
 	// ##########################################################

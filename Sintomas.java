@@ -54,8 +54,8 @@ public class Sintomas{
             }
 
             else if(choice == 2){
-                System.out.println("Stocastich counter algorithm one: " + CEone.toString());
-                System.out.println("Stocastich counter algorithm two: " + CEtwo.toString());
+                System.out.println("Stocastich counter algorithm one: " + CEone.primeiraToString());
+                System.out.println("Stocastich counter algorithm two: " + CEtwo.segundaToString());
             }
 
             else if(choice == 3){
