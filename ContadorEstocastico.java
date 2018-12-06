@@ -34,11 +34,23 @@ public class ContadorEstocastico{
 	}
 
 	public String primeiraToString() {
-		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements: " + 2*n;
+		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements: " + 2 * n;
 	}
 
 	public String segundaToString() {
-		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements: " + 2 * n;
+		int sum = 0;
+		if(n == 0){
+			sum = 0;
+		}
+		else if(n == 1){
+			sum = 1;
+		}
+		else{
+			for (int i = 0; i <= n; i++) {
+				sum += 2^n;
+			}
+		}
+		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements: " + sum;
 	}
 
 	// ##########################################################
