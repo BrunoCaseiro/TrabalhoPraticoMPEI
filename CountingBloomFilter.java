@@ -39,7 +39,7 @@ public class CountingBloomFilter {
         bloom = new int[this.n];				            // Inicializa o array com todos os elementos a 0.   
     }
 
-    public boolean isMember(String elemento, int k){    // Membership Test, tem de verificar se cada bucket está a zero
+    public boolean isMember(String elemento){    // Membership Test, tem de verificar se cada bucket está a zero
         int key = stringToHash(elemento);
         if(bloom[key] == 0){
             return false;
@@ -53,7 +53,7 @@ public class CountingBloomFilter {
         return true;                                                             
     }
 
-    public boolean isMemberOne(String elemento, int k) { // Membership Test, tem de verificar se cada bucket está a zero
+    public boolean isMemberOne(String elemento) { // Membership Test, tem de verificar se cada bucket está a zero
         int key = stringToHashOne(elemento);
         if (bloom[key] == 0) {
             return false;
@@ -67,7 +67,7 @@ public class CountingBloomFilter {
         return true;
     }
 
-    public void insert(String elemento, int k){                
+    public void insert(String elemento){                
         int key = stringToHash(elemento);
         bloom[key]++;
         for (int i = 0; i < k-1; i++) {
@@ -84,8 +84,8 @@ public class CountingBloomFilter {
         m = 0;
     }
 
-    public boolean delete(String elemento, int k){                // Decrementa todos os buckets do respetivo member
-        if(isMember(elemento, k)){
+    public boolean delete(String elemento){                // Decrementa todos os buckets do respetivo member
+        if(isMember(elemento)){
             int key = stringToHash(elemento);
             bloom[key]--;
             for (int i = 0; i < k-1; i++) {
@@ -100,8 +100,8 @@ public class CountingBloomFilter {
         }                                         
     }
 
-    public boolean deleteOne(String elemento, int k) { // Decrementa todos os buckets do respetivo member
-        if (isMemberOne(elemento, k)) {
+    public boolean deleteOne(String elemento) { // Decrementa todos os buckets do respetivo member
+        if (isMemberOne(elemento)) {
             int key = stringToHashOne(elemento);
             bloom[key]--;
             for (int i = 0; i < k - 1; i++) {
@@ -147,7 +147,7 @@ public class CountingBloomFilter {
     }
 
 
-    public void insertOne(String elemento, int k) {                  // Utiliza stringToHashOne
+    public void insertOne(String elemento) {                  // Utiliza stringToHashOne
         int key = stringToHashOne(elemento);
         bloom[key]++;
         for (int i = 0; i < k - 1; i++) {
@@ -232,37 +232,37 @@ public class CountingBloomFilter {
 	// For test purposes only
     public static void main(String[] args) {
         CountingBloomFilter teste = new CountingBloomFilter(1000);
-        teste.insertOne("teste", 3);
-        System.out.println(teste.isMemberOne("teste", 3));
+        teste.insertOne("teste");
+        System.out.println(teste.isMemberOne("teste"));
         System.out.println(teste.size());
         System.out.println(teste.getM());
-        System.out.println(teste.deleteOne("teste", 3));
-        System.out.println(teste.isMemberOne("teste", 3));
+        System.out.println(teste.deleteOne("teste"));
+        System.out.println(teste.isMemberOne("teste"));
         System.out.println(teste.size());
         System.out.println(teste.getM());
 
         System.out.println("");
 
-        teste.insertOne("add1", 3);
+        teste.insertOne("add1");
         System.out.println(teste.countOne("add1"));
-        teste.insertOne("add2", 3);
-        teste.insertOne("add3", 3);
-        teste.insertOne("add1", 3);                    
+        teste.insertOne("add2");
+        teste.insertOne("add3");
+        teste.insertOne("add1");                    
         System.out.println(teste.countOne("add1"));   
-        teste.insertOne("add1", 3);                    
-        teste.insertOne("add1", 3);                   
+        teste.insertOne("add1");                    
+        teste.insertOne("add1");                   
         System.out.println(teste.countOne("add1"));    
-        System.out.println(teste.isMemberOne("add3", 3));
+        System.out.println(teste.isMemberOne("add3"));
         System.out.println(teste.size());
         System.out.println(teste.getM());
 
         System.out.println("");
         teste.reset();
 
-        System.out.println(teste.isMemberOne("add1", 3));
+        System.out.println(teste.isMemberOne("add1"));
         System.out.println(teste.countOne("add1"));
-        System.out.println(teste.isMemberOne("add2", 3));
-        System.out.println(teste.isMemberOne("add3", 3));
+        System.out.println(teste.isMemberOne("add2"));
+        System.out.println(teste.isMemberOne("add3"));
         System.out.println(teste.count("add3"));
         System.out.println(teste.size());
         System.out.println(teste.getM());

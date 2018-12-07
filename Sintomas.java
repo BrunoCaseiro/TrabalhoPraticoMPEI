@@ -11,6 +11,7 @@ public class Sintomas{
         CBFdisease.initialize();
         ContadorEstocastico CEone = new ContadorEstocastico();
         ContadorEstocastico CEtwo = new ContadorEstocastico(0);
+        ArrayList<String> map = new ArrayList<String>();
 
         while(true){
                 System.out.println("\n\n\n\n\t\t*****MPEI Global Test*****");
@@ -26,7 +27,6 @@ public class Sintomas{
                 System.out.print("Shingle Size ([1,3] recommended): ");
                 int shingleSize = sc.nextInt();
                 MinHash x = new MinHash(shingleSize);
-                ArrayList<String> map = new ArrayList<String>();
 
                 System.out.println("\n\t\t*****Welcome to Jaccard's Clinic!*****\n");
                 System.out.print("Please describe your symptoms...\n\t");
@@ -39,27 +39,36 @@ public class Sintomas{
                 double JSmax = 0.0;
                 int index = 0;
 
-                for (int i = 2; i < x.setSaver().size(); i++){
+                for (int i = 2; i <= x.setSaver().size(); i++){
                     if(x.JSimMH(1, i) > JSmax){
                         JSmax = x.JSimMH(1,i);
                         index = i;
                     }
                 }
 
-
                 System.out.println("YOU HAVE: " + map.get(index-2));
-                CBFdisease.insert(map.get(index-2), CBFdisease.getK());
+                CBFdisease.insert(map.get(index-2));
                 CEone.primeiraSolucao();
                 CEtwo.segundaSolucao();
             }
 
             else if(choice == 2){
-                System.out.println("Stocastich counter algorithm one: " + CEone.primeiraToString());
-                System.out.println("Stocastich counter algorithm two: " + CEtwo.segundaToString());
+                System.out.println("Stochastic counter algorithm one: " + CEone.primeiraToString());
+                System.out.println("Stochastic counter algorithm two: " + CEtwo.segundaToString());
             }
 
             else if(choice == 3){
-                //histograma goes here
+                for (int i = 0; i < map.size(); i++) {
+                    System.out.print(map.get(i) + "|");
+
+                    if(CBFdisease.isMember(map.get(i))){
+                        for (int j = 0; j < CBFdisease.count(map.get(i)); j++) {
+                            System.out.print("*");
+                        }
+                    } 
+
+                    System.out.println();   
+                }
             }
 
             else if(choice == 4){
