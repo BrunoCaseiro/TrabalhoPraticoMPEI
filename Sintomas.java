@@ -63,7 +63,7 @@ public class Sintomas{
 
             else if(choice == 3){
                 for (int i = 0; i < map.size(); i++) {
-                    System.out.print(map.get(i) + "|");
+                    System.out.print(String.format("%10s %1s", map.get(i),"|"));
 
                     if(CBFdisease.isMember(map.get(i))){
                         for (int j = 0; j < CBFdisease.count(map.get(i)); j++) {
