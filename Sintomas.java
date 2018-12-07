@@ -45,11 +45,15 @@ public class Sintomas{
                         index = i;
                     }
                 }
-
-                System.out.println("YOU HAVE: " + map.get(index-2));
-                CBFdisease.insert(map.get(index-2));
-                CEone.primeiraSolucao();
-                CEtwo.segundaSolucao();
+                if(index != 0){
+                    System.out.println("YOU HAVE: " + map.get(index-2));
+                    CBFdisease.insert(map.get(index-2));
+                    CEone.primeiraSolucao();
+                    CEtwo.segundaSolucao();
+                }
+                else{
+                    System.out.println("Nothing found...");
+                }
             }
 
             else if(choice == 2){
