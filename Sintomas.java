@@ -1,5 +1,3 @@
-// Só falta o histograma de doenças através do CBF
-
 import java.util.*;
 import java.io.*;
 
@@ -32,27 +30,32 @@ public class Sintomas{
                 System.out.print("Please describe your symptoms...\n\t");
                 sc.nextLine();
                 String sick = sc.nextLine();
-                x.wordShingle(sick);
-                map = loadD(x);
-                MinHash.updateMatrix();
-
-                double JSmax = 0.0;
-                int index = 0;
-
-                for (int i = 2; i <= x.setSaver().size(); i++){
-                    if(x.JSimMH(1, i) > JSmax){
-                        JSmax = x.JSimMH(1,i);
-                        index = i;
-                    }
-                }
-                if(index != 0){
-                    System.out.println("YOU HAVE: " + map.get(index-2));
-                    CBFdisease.insert(map.get(index-2));
-                    CEone.primeiraSolucao();
-                    CEtwo.segundaSolucao();
+                if(sick.length() < shingleSize){
+                    System.out.println("Shingle Size should be longer than the amount of words describing your symptoms...");
                 }
                 else{
+                    x.wordShingle(sick);
+                    map = loadD(x);
+                    MinHash.updateMatrix();
+
+                    double JSmax = 0.0;
+                    int index = 0;
+
+                    for (int i = 2; i <= x.setSaver().size(); i++){
+                        if(x.JSimMH(1, i) > JSmax){
+                            JSmax = x.JSimMH(1,i);
+                            index = i;
+                        }
+                    }
+                    if(index != 0){
+                        System.out.println("YOU HAVE: " + map.get(index-2));
+                        CBFdisease.insert(map.get(index-2));
+                        CEone.primeiraSolucao();
+                        CEtwo.segundaSolucao();
+                    }
+                    else{
                     System.out.println("Nothing found...");
+                    }
                 }
             }
 
