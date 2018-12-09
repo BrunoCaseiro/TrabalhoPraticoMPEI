@@ -26,26 +26,30 @@ public class TestMinHash {
 
         System.out.println("--------------------------------------------------");
         
-        System.out.println(setSaver());
-        System.out.println(shingleSaver());
-        updateMatrix();
-        System.out.println(matrix[0][0] == 1);
-        System.out.println(matrix[2][0] == 0);
-        System.out.println(matrix[4][26] == 1);
-        System.out.println(matrix[4][19] == 0);
+        System.out.println(x1.setSaver());
+        System.out.println(x1.shingleSaver());
+        x1.updateMatrix();
+        int[][] m = x1.getMatrix();
+        System.out.println(m[0][0] == 1);
+        System.out.println(m[2][0] == 0);
+        System.out.println(m[4][26] == 1);
+        System.out.println(m[4][19] == 0);
+ 
+        System.out.println("--------------------------------------------------");
+
         System.out.println("SEM MINHASH");
-        System.out.println(JSim(1,2));
-        System.out.println(JSim(11,12));
-        System.out.println(JSim(13,14));
-        System.out.println(JSim(15, 16));
+        System.out.println(x2.JSim(1,2));
+        System.out.println(x1.JSim(11,12));
+        System.out.println(x1.JSim(13,14));
+        System.out.println(x1.JSim(15, 16));
         
         System.out.println("--------------------------------------------------");
         
         System.out.println("COM MINHASH");
-        System.out.println(JSimMH(1, 2));
-        System.out.println(JSimMH(11, 12));
-        System.out.println(JSimMH(13, 14));
-        System.out.println(JSimMH(15, 16));
+        System.out.println(x2.JSimMH(1, 2));
+        System.out.println(x1.JSimMH(11, 12));
+        System.out.println(x1.JSimMH(13, 14));
+        System.out.println(x1.JSimMH(15, 16));
         
         
         // RESULTADO ESPERADO (ou provavel, para a secção "COM MINHASH"):
@@ -74,16 +78,16 @@ public class TestMinHash {
         // true
         // SEM MINHASH
         // 0
-        // 0.20
-        // 1
+        // 0.2
+        // 1.0
         // 0.24
 
         // --------------------------------------------------
 
         // COM MINHASH
         // 0
-        // 0.20
-        // 1
+        // 0.2
+        // 1.0
         // 0.24
     }
 }

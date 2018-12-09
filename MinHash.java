@@ -39,6 +39,10 @@ public class MinHash {
         }
     }
 
+    public int[][] getMatrix(){
+        return matrix;
+    }
+
     public MinHash(int n, double e){
         this.n = n;
 
@@ -239,4 +243,3 @@ public class MinHash {
         return 1-JSimMH(set1, set2);
     }
 }
-
