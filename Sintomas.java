@@ -22,7 +22,7 @@ public class Sintomas{
                  
 
             if(choice == 1){    
-                System.out.print("Shingle Size ([1,3] recommended): ");
+                System.out.print("Shingle Size (1 recommended): ");
                 int shingleSize = sc.nextInt();
                 MinHash x = new MinHash(shingleSize);
 
@@ -30,6 +30,8 @@ public class Sintomas{
                 System.out.print("Please describe your symptoms...\n\t");
                 sc.nextLine();
                 String sick = sc.nextLine();
+                sick = sick.toLowerCase();
+
                 if(sick.length() < shingleSize){
                     System.out.println("Shingle Size should be longer than the amount of words describing your symptoms...");
                 }
