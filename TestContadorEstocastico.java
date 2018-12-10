@@ -17,5 +17,9 @@ public class TestContadorEstocastico {
             System.out.println(two.segundaToString());
         }
         System.out.println("Final result of the counter: "+ two.getN());
+
+        // RESULTADO ESPERADO:
+        
+        // ..............
     }
 }
