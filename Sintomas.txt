@@ -11,7 +11,7 @@ DIABETES
 FLU
     skip severe aches in muscles joints pain tiredness around your eyes weakness extreme fatigue red watery eyes headache cough sore throat runny nose trouble breathing pain chest belly vomiting
 @
-HIV/AIDS
+AIDS
     skip nausea vomiting diarrhea chronic fatigue weight loss cough shortness of breath recurring fever chills night sweats rashes soresin the mouth nose on the genitals the skin
 @
 PNEUMONIA
@@ -38,13 +38,13 @@ EBOLA
 EPILEPSY
     skip temporary confusion staring uncontrollable jerking movements of the arms legs loss of consciousness awareness psychic symptoms fear anxiety deja vu
 @
-HEPATITIS B
+HEPATITIS-B
     skip abdominal pain dark urine fever joint pain loss of appetite nausea vomiting weakness fatigue yellowing yellow of your skin the whites of your eyes jaunidce
 @
 ANXIETY
     skip feeling nervous restless tense sense of impending danger panic doom increased heart rate breathing rapidly hyperventilation sweating trembling weak tired worry avoid things
 @
-CEREBRAL PALSY
+CEREBRAL-PALSY
     skip muscle stiff floppy reflexes coordination tremors involuntary movements slow movement move delay walking drooling eating speaking precise motions seizures one side
 @
 LEGIONELLOSIS
@@ -53,7 +53,7 @@ LEGIONELLOSIS
 LICE
     skip intense itching tickling feeling from movement of hair lice on your scalp body clothing pubic body hair lice eggs nits on hair shafts small red bumps on the scalp neck shoulders
 @
-LOW BLOOD PRESSURE/HYPOTENSION
+HYPOTENSION
     skip dizziness lightheadedness fainting syncope blurred vision nausea fatigue lack of concentration confusion cold clammy pale skin rapid shallow breathing weak rapid pulse
 @
 PARKINSON
