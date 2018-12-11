@@ -2,14 +2,11 @@
 DEPRESSION
     skip trouble concentrating remembering details making decisions fatigue guilt pessimism hopelessness insomnia morning wake sleeping too much loss of interest appetite loss sad anxious empty feelings suicidal
 @
-ADHD
-    skip be disorganized lack focus no attention to details careless mistakes messy seem careless have trouble staying on topic not listening forget distracted fidget restless energy talk excessively impatience loud
-@
 DIABETES
     skip hunger fatigue peeing more often being thirstier dry mouth itchy skin blurred vision slow healing pain in feet legs weight loss nausea vomiting tired always hungry crave sugar
 @
 FLU
-    skip severe aches in muscles joints pain tiredness around your eyes weakness extreme fatigue red watery eyes headache cough sore throat runny nose trouble breathing pain chest belly vomiting
+    skip severe aches in muscles joints pain tiredness around your eyes weakness extreme fatigue red watery eyes headache cough sore throat runny nose trouble breathing pain chest belly vomiting sneeze sneezing
 @
 AIDS
     skip nausea vomiting diarrhea chronic fatigue weight loss cough shortness of breath recurring fever chills night sweats rashes soresin the mouth nose on the genitals the skin
@@ -29,59 +26,11 @@ ANOREXIA
 ASTHMA
     skip trouble sleeping wheezing coughing short breath chest tight tightness pain whistling sound exhale difficulty breathing hard inhaling tired quickly when exercise exercising
 @
-CANDIDIASIS
-    skip creamy white lesions on tongue inner cheeks roof of mouth gums tonsils raised lesions redness burning soreness cause difficulty eating swallowing bleeding rubbed scraped cracking corners mouth
-@
-EBOLA
-    skip fever headache joint muscle aches chills weakness nausea vomiting diarrhea bloody red eyes chest pain cough sore throat stomach pain weight loss bruising bruse bleed ears
-@
-EPILEPSY
-    skip temporary confusion staring uncontrollable jerking movements of the arms legs loss of consciousness awareness psychic symptoms fear anxiety deja vu
-@
-HEPATITIS-B
-    skip abdominal pain dark urine fever joint pain loss of appetite nausea vomiting weakness fatigue yellowing yellow of your skin the whites of your eyes jaunidce
-@
 ANXIETY
     skip feeling nervous restless tense sense of impending danger panic doom increased heart rate breathing rapidly hyperventilation sweating trembling weak tired worry avoid things
 @
-CEREBRAL-PALSY
-    skip muscle stiff floppy reflexes coordination tremors involuntary movements slow movement move delay walking drooling eating speaking precise motions seizures one side
-@
-LEGIONELLOSIS
-    skip headache muscle pain chills fever high cough mucus sometimes blood shortness short of breath chest pain nausea vomiting diarrhea confusion mental changes
-@
-LICE
-    skip intense itching tickling feeling from movement of hair lice on your scalp body clothing pubic body hair lice eggs nits on hair shafts small red bumps on the scalp neck shoulders
-@
-HYPOTENSION
-    skip dizziness lightheadedness fainting syncope blurred vision nausea fatigue lack of concentration confusion cold clammy pale skin rapid shallow breathing weak rapid pulse
-@
 PARKINSON
     skip tremor slow movements bradykinesia rigid muscles impaired posture balance loss of move movements speech changes writing changes memory loss motion weak
-@
-RABIES
-    skip fever headache nausea vomiting agitation anxiety confusion hyperactivity hiperactive difficulty swallowing hydrophobia fear of water insomnia hallucinations paralysis
-@
-RINGWORM
-    skip round patches of scaly skin hair broken off scalp scaly gray reddened areas small black dots brittle fragile hair that easily pulls out tender painful areas on the scalp
-    @
-RUBEOLA
-    skip fever dry cough runny nose sore throat inflamed eyes conjuctivitis tiny white spots with blue white centers on a red background inside mouth on the inner lining of the cheek
-@
-SCABIES
-    skip itching often severe usually worse at night thin irregular burrow tracks made up of tiny blisters bumps on your skin fingers armpits waist wrists inner elbows around breasts
-@
-STROKE
-    skip trouble speaking understanding communicating paralysis arm face leg trouble seeing one eye headache hard walk one side of face one arm only half movement 
-@
-TUBERCULOSIS
-    skip coughing blood chest pain breathing cough unintentional weight loss fatigue fever night sweats chills loss of appetite kidneys spine back pain urine
-@
-TETANUS
-    skip spasms stiff jaw muscles difficult hard swallow swalloing abdominal abs ever sweating high blood pressure rapid heart rate spasms random painful
-@
-THROMBOSIS
-    skip pain in leg legs calf cramping soreness warmth warm affected leg red discolered skin sudden short of breath shortness dizzy lightheaded lightheadedness rapid pulse 
 @
 VARICELLA
     skip fever tiredness loss of apetite headache rash itchy pimples pox fluid blisters scabs face chest back itch red redness inside mouth genital eyelids 

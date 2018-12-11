@@ -51,7 +51,7 @@ public class JaccardsClinic{
                             index = i;
                         }
                     }
-                    if(index != 0 && JSmax > 0.2){
+                    if(index != 0){
                         System.out.println("You probably have: " + map.get(index-2));
                         System.out.println("However, this is just a diagnosis. Consult your doctor for a more detailed examination.");
                         CBFdisease.insert(map.get(index-2));
