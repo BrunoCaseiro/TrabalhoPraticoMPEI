@@ -66,7 +66,7 @@ public class TestCountingBloomFilter {
                 count++;
             }
         }
-        System.out.println("Generating 1000 random strings with 40 characters each, there are "+ count +" strings that are repeated 2 or more times.");
+        System.out.println("Generated 1000 random strings with 40 characters each, there are "+ count +" strings that are repeated 2 or more times.");
 
         System.out.println("");
         System.out.println("WORDS ON A FILE WITH JAVA DEFAULT HASH FUNCTION");
@@ -114,7 +114,10 @@ public class TestCountingBloomFilter {
         // 0
         // Todos os slots do bloom filter (0 até n-1) têm de ser 0
 
-        // WORDS ON A FILE
+        // RANDOM WORDS WITH JAVA DEFAULT HASH FUNCTION
+        // Generated 1000 random strings with 40 characters each, there are 85 strings that are repeated 2 or more times. [aproximadamente]
+
+        // WORDS ON A FILE WITH JAVA DEFAULT HASH FUNCTION
         // Contar as palavras do ficheiro "lorem" online e comparar com os resultados obtidos
         //          (é possível que o número exceda a realidade por causa dos falsos positivos)
         
