@@ -27,7 +27,7 @@ public class TestContadorEstocastico {
 
         // Contagem ate 1000 com a segunda solucao:
         // ... ... ...
-        // Counter: 9; Probability of adding next element: 0.001953125; Number of elements (approximately): 11 [aproximadamente]
+        // Counter: 9; Probability of adding next element: 0.001953125; Number of elements (approximately): 32288 [aproximadamente]
         // Final result of the counter: 9 [aproximadamente]
     }
 }
