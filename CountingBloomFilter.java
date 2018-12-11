@@ -1,6 +1,3 @@
-// Foi extraída bastante informação dos slides das TPs
-// Algumas funções são repetidas com a variante da stringToHash: stringToHash, stringToHashOne
-// Estas duas últimas foram criadas por nós
 import java.util.*;
 
 public class CountingBloomFilter {
@@ -36,10 +33,10 @@ public class CountingBloomFilter {
 
 
     public void initialize(){
-        bloom = new int[this.n];				            // Inicializa o array com todos os elementos a 0.   
+        bloom = new int[this.n];				        // Inicializa o array com todos os elementos a 0.   
     }
 
-    public boolean isMember(String elemento){    // Membership Test, tem de verificar se cada bucket está a zero
+    public boolean isMember(String elemento){           // Membership Test, tem de verificar se cada bucket está a zero
         int key = stringToHash(elemento);
         if(bloom[key] == 0){
             return false;
@@ -53,13 +50,13 @@ public class CountingBloomFilter {
         return true;                                                             
     }
 
-    public boolean isMemberOne(String elemento) { // Membership Test, tem de verificar se cada bucket está a zero
-        int key = stringToHashOne(elemento);
+    public boolean isMemberCustom(String elemento) {       // Membership Test, tem de verificar se cada bucket está a zero
+        int key = stringToHashCustom(elemento);
         if (bloom[key] == 0) {
             return false;
         }
         for (int i = 0; i < k - 1; i++) {
-            key = stringToHashOne(Integer.toString(key));
+            key = stringToHashCustom(Integer.toString(key));
             if (bloom[key] == 0) {
                 return false;
             }
@@ -76,6 +73,16 @@ public class CountingBloomFilter {
         }
         m++;
     }
+
+    public void insertCustom(String elemento) {            // Utiliza stringToHashCustom
+        int key = stringToHashCustom(elemento);
+        bloom[key]++;
+        for (int i = 0; i < k - 1; i++) {
+            key = stringToHashCustom(Integer.toString(key));
+            bloom[key]++;
+        }
+        m++;
+    }
     
     public void reset(){           
         for (int i = 0; i < bloom.length; i++) {
@@ -84,7 +91,7 @@ public class CountingBloomFilter {
         m = 0;
     }
 
-    public boolean delete(String elemento){                // Decrementa todos os buckets do respetivo member
+    public boolean delete(String elemento){             // Decrementa todos os buckets do respetivo member
         if(isMember(elemento)){
             int key = stringToHash(elemento);
             bloom[key]--;
@@ -100,12 +107,12 @@ public class CountingBloomFilter {
         }                                         
     }
 
-    public boolean deleteOne(String elemento) { // Decrementa todos os buckets do respetivo member
-        if (isMemberOne(elemento)) {
-            int key = stringToHashOne(elemento);
+    public boolean deleteCustom(String elemento) {         // Decrementa todos os buckets do respetivo member
+        if (isMemberCustom(elemento)) {
+            int key = stringToHashCustom(elemento);
             bloom[key]--;
             for (int i = 0; i < k - 1; i++) {
-                key = stringToHashOne(Integer.toString(key));
+                key = stringToHashCustom(Integer.toString(key));
                 bloom[key]--;
             }
             m--;
@@ -115,7 +122,7 @@ public class CountingBloomFilter {
         }
     }
 
-    public int count(String elemento){                 // Ir buscar os buckets do elemento e ficar com o menor valor
+    public int count(String elemento){                  // Ir buscar os buckets do elemento e ficar com o menor valor
         int key = stringToHash(elemento);
         int min = bloom[key];
         
@@ -128,12 +135,12 @@ public class CountingBloomFilter {
         return min;
     }
 
-    public int countOne(String elemento) { // Ir buscar os buckets do elemento e ficar com o menor valor
-        int key = stringToHashOne(elemento);
+    public int countCustom(String elemento) {              // Ir buscar os buckets do elemento e ficar com o menor valor
+        int key = stringToHashCustom(elemento);
         int min = bloom[key];
 
         for (int i = 0; i < k - 1; i++) {
-            key = stringToHashOne(Integer.toString(key));
+            key = stringToHashCustom(Integer.toString(key));
             if (min >= bloom[key]) {
                 min = bloom[key];
             }
@@ -146,33 +153,20 @@ public class CountingBloomFilter {
         return Math.abs(key);
     }
 
-
-    public void insertOne(String elemento) {                  // Utiliza stringToHashOne
-        int key = stringToHashOne(elemento);
-        bloom[key]++;
-        for (int i = 0; i < k - 1; i++) {
-            key = stringToHashOne(Integer.toString(key));
-            bloom[key]++;
-        }
-        m++;
-    }
-
-
-    public int stringToHashOne(String elemento) {               // HashFunction criada por nós
+    public int stringToHashCustom(String elemento) {               // Hash function personalizada criada por nós
         int key = 0;
 
         for (int i = 0; i < elemento.length(); i++) {
             key = key + (int) elemento.charAt(i);               // Soma os asciis de todos os chars na string
         }
-        return Math.abs((key * elemento.length()) % n);                    // Multiplica o resultado pelo número de códigos
+        return Math.abs((key * elemento.length()) % n);         // Multiplica o resultado pelo número de códigos
     }
 
     public int optimalValueK(){                 // https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions            
         return (int) ((m/n)*Math.log(2));       // k = (m/n)*ln2, sendo p a probabilidade de false positive
     }
 
-    // ***Getters***
-    public int size() {                 // ou getN(), número de buckets
+    public int size() {                 // aka getN(), numero de buckets
         return n;
     }
 
@@ -180,11 +174,11 @@ public class CountingBloomFilter {
         return k;
     }
 
-    public int getM() {                 // Elementos alocados
+    public int getM() {                 // Numero de elementos alocados
         return m;
     }
 
-    public double getP() {                 // Retorna nº de falsos positivos
+    public double getP() {              // Retorna numero de falsos positivos
         return p;
     }
 
@@ -202,9 +196,7 @@ public class CountingBloomFilter {
 
         return s;
     }
-    // End Getters
 
-    // ***Metodos gerados pelo VS Code***
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -220,11 +212,4 @@ public class CountingBloomFilter {
     public int hashCode() {
         return Objects.hash(n, k, m, p, bloom);
     }
-
-    @Override
-    public String toString() {
-        return "{" + " n='" + size() + "'" + ", k='" + getK() + "'" + ", m='" + getM() + "'" + ", p='" + getP() + "'" + ", bloom='" + getBloomToString() + "'" + "}";
-    }
-
-    // End Metodos gerados pelo VS Code
 }

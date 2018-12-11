@@ -1,27 +1,27 @@
 import java.util.*;
 
 public class MinHash {
-    private int n;                                                  // n-shingle
-    private static int k = 500;                                   // k hash functions, 500 por default
-    private double e;                                      // Expected error
-    private static int[] a, b;                             // guarda valores a, b a ser usados nas uniHash
+    private int n;                                              // n-shingle
+    private static int k = 500;                                 // k hash functions, 500 por default
+    private double e;                                           // Expected error
+    private static int[] a, b;                                  // guarda valores a, b a ser usados nas uniHash
     private static int[][] matrix;                               
-    private static ArrayList<ArrayList<String>> setSaver;  // Guarda todos os arraylists com shingles (sets)
+    private static ArrayList<ArrayList<String>> setSaver;       // Guarda todos os arraylists com shingles (sets)
     private static ArrayList<String> shingleSaver;
 
     // Constructors, Getters, Setters
-    public MinHash(int n, int newK){                          // hash functions number pode ou não ser definido
+    public MinHash(int n, int newK){                        // hash functions number pode ou não ser definido
         this.n = n;
         newK = k;
-        e = Math.sqrt(1/k);                                // k = O(1/e²)
+        e = Math.sqrt(1/k);                                 // k = O(1/e²)
         setSaver = new ArrayList<ArrayList<String>>();
         shingleSaver = new ArrayList<String>();
         a = new int[k];
         b = new int[k];
 
         for (int i = 0; i < k; i++) {
-            a[i] = (int) Math.floor((Math.random() * 100) + 1); // gera k random ints
-            b[i] = (int) Math.floor((Math.random() * 100) + 1); // gera k random ints
+            a[i] = (int) Math.floor((Math.random() * 100) + 1);     // gera k random ints
+            b[i] = (int) Math.floor((Math.random() * 100) + 1);     // gera k random ints
         }
     }
 
@@ -34,8 +34,8 @@ public class MinHash {
         b = new int[k];
 
         for (int i = 0; i < k; i++) {
-            a[i] = (int) Math.floor((Math.random() * 100) + 1); // gera k random ints
-            b[i] = (int) Math.floor((Math.random() * 100) + 1); // gera k random ints
+            a[i] = (int) Math.floor((Math.random() * 100) + 1);     // gera k random ints
+            b[i] = (int) Math.floor((Math.random() * 100) + 1);     // gera k random ints
         }
     }
 
@@ -61,8 +61,8 @@ public class MinHash {
         b = new int[k];
 
         for (int i = 0; i < k; i++) {
-            a[i] = (int) Math.floor((Math.random() * 100)+1); // gera k random ints
-            b[i] = (int) Math.floor((Math.random() * 100)+1); // gera k random ints
+            a[i] = (int) Math.floor((Math.random() * 100)+1);       // gera k random ints
+            b[i] = (int) Math.floor((Math.random() * 100)+1);       // gera k random ints
         }
     }
 
@@ -170,9 +170,9 @@ public class MinHash {
     }
 
     // Jaccard w/o minHash
-    public static double JSim(int set1, int set2){          // são pedidos os sets a comparar,
-        set1 -= 1;                                                      // ex.: primeiro set e terceiro set
-        set2 -= 1;                                                      // set = 1 (indice 0), set2 = 3 (indice 2)
+    public static double JSim(int set1, int set2){              // são pedidos os sets a comparar,
+        set1 -= 1;                                              // ex.: primeiro set e terceiro set
+        set2 -= 1;                                              // set = 1 (indice 0), set2 = 3 (indice 2)
         double union = 0;
         double intersection = 0;
 
@@ -197,8 +197,8 @@ public class MinHash {
     // minHash
     public static ArrayList<Integer> getSignature(int set){
         set -= 1;
-        ArrayList<String> sets = setSaver.get(set);      // Busca o arrayList correspondente ao set desejado
-        int min;                                    // valor mínimo inicial, qql valor da universalHash é menor 
+        ArrayList<String> sets = setSaver.get(set);             // Busca o arrayList correspondente ao set desejado
+        int min;                                                // valor mínimo inicial, qql valor da universalHash é menor 
         ArrayList<Integer> signature = new ArrayList<Integer>();
         int id;        
 
@@ -207,7 +207,7 @@ public class MinHash {
             for (int j = 0; j < sets.size(); j++) {
                 id = shingleSaver.indexOf(sets.get(j)) + 100;   // +100 para que id > a && id > b
                 if(uniHash(id, a[i], b[i]) < min){
-                    min = uniHash(id, a[i], b[i]);        // ENCONTRA DEMASIADOS VALORES = 0
+                    min = uniHash(id, a[i], b[i]);              // ENCONTRA DEMASIADOS VALORES = 0
                 }
             }
             signature.add(min);
@@ -217,7 +217,7 @@ public class MinHash {
     }
 
     public static int uniHash(int id, int a, int b){
-        int p = 211;                                 // número primo
+        int p = 211;                                        // número primo
         return ((a*id + b) % p);              
     }
 
