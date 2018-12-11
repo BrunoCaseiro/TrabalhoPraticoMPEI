@@ -72,7 +72,7 @@ public class TestCountingBloomFilter {
         System.out.println("WORDS ON A FILE WITH JAVA DEFAULT HASH FUNCTION");
 
         CountingBloomFilter file = new CountingBloomFilter(1000);
-        File lorem = new File("lorem.txt");
+        File lorem = new File("Lorem.txt");
         Scanner fsc = new Scanner(lorem);
         HashSet<String> set = new HashSet<String>();
 

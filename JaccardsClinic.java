@@ -104,7 +104,7 @@ public class JaccardsClinic{
 
 
     public static ArrayList<String> loadD(MinHash x) throws IOException{
-        File list = new File("list.txt");
+        File list = new File("Sintomas.txt");
         Scanner fsc = new Scanner(list);
         ArrayList<String> map = new ArrayList<String>();
 
