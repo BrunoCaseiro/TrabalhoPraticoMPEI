@@ -12,8 +12,11 @@ public class Sintomas{
         ArrayList<String> map = new ArrayList<String>();
 
         while(true){
-                System.out.println("\n\n\n\n\t\t*****MPEI Global Test*****");
-                System.out.print("1) Start test\n2) Show user count\n3) Show disease graph\n4) Exit\n\t");
+                System.out.println("\n\t\t***** Welcome to Jaccard's Clinic *****\n");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("How can we help you?");
+                System.out.print("  1) Begin diagnosis\n  2) Show user count\n  3) Show disease graph\n  4) Exit\n\nOption: ");
                 try{
                     choice = sc.nextInt();
                 }catch(InputMismatchException ime){
@@ -22,18 +25,17 @@ public class Sintomas{
                  
 
             if(choice == 1){    
-                System.out.print("Shingle Size (1 recommended): ");
+                System.out.print("Choose shingle size (1 is recommended): ");
                 int shingleSize = sc.nextInt();
                 MinHash x = new MinHash(shingleSize);
 
-                System.out.println("\n\t\t*****Welcome to Jaccard's Clinic!*****\n");
-                System.out.print("Please describe your symptoms...\n\t");
+                System.out.print("Please describe your symptoms (at least 3 recommended):\n\t");
                 sc.nextLine();
                 String sick = sc.nextLine();
                 sick = sick.toLowerCase();
 
                 if(sick.length() < shingleSize){
-                    System.out.println("Shingle Size should be longer than the amount of words describing your symptoms...");
+                    System.out.println("The amount of words describing your symptoms should be longer than the chosen shingle size!");
                 }
                 else{
                     x.wordShingle(sick);
@@ -50,13 +52,15 @@ public class Sintomas{
                         }
                     }
                     if(index != 0){
-                        System.out.println("YOU HAVE: " + map.get(index-2));
+                        System.out.println("You probably have: " + map.get(index-2));
+                        System.out.println("However, this is just a diagnosis. Consult your doctor for a more detailed examination.");
                         CBFdisease.insert(map.get(index-2));
                         CEone.primeiraSolucao();
                         CEtwo.segundaSolucao();
                     }
                     else{
-                    System.out.println("Nothing found...");
+                        System.out.println("We didn't find any disease with these symptoms.");
+                        System.out.println("Maybe you are describing very few symptoms. Please try to be as specific as possible.");
                     }
                 }
             }
@@ -67,8 +71,12 @@ public class Sintomas{
             }
 
             else if(choice == 3){
+                if (map.size()==0){
+                    System.out.println("No diagnoses have yet been made to show a disease chart!");
+                }
+
                 for (int i = 0; i < map.size(); i++) {
-                    System.out.print(String.format("%10s %1s", map.get(i),"|"));
+                    System.out.print(String.format("%20s %1s", map.get(i),"|"));
 
                     if(CBFdisease.isMember(map.get(i))){
                         for (int j = 0; j < CBFdisease.count(map.get(i)); j++) {
@@ -77,15 +85,17 @@ public class Sintomas{
                     } 
 
                     System.out.println();   
-                }
+                }  
             }
 
             else if(choice == 4){
                 System.exit(0);
+                // Close the program
             }
 
             else{
-                //nothing, jumps to start of program
+                System.out.println("Invalid option!");
+                // Jumps to the menu again
             }
         }
     }
@@ -98,14 +108,12 @@ public class Sintomas{
         ArrayList<String> map = new ArrayList<String>();
 
         while(fsc.hasNextLine()){
-
             if(fsc.next().charAt(0) == '@'){
                 map.add(fsc.next());
             }
             else{
                 x.wordShingle(fsc.nextLine());
             }
-
         }
         fsc.close();
         return map;
