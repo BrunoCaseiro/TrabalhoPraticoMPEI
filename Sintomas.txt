@@ -9,10 +9,10 @@ DIABETES
     skip hunger fatigue peeing more often being thirstier dry mouth itchy skin blurred vision slow healing pain in feet legs weight loss nausea vomiting tired always hungry crave sugar
 @
 FLU
-    skip severe aches in muscles joints pain tiredness around your eyes weakness extreme fatigue red watery eyes headache cough sore throat runny nose trouble breathing pain in your chest belly vomiting
+    skip severe aches in muscles joints pain tiredness around your eyes weakness extreme fatigue red watery eyes headache cough sore throat runny nose trouble breathing pain chest belly vomiting
 @
 HIV/AIDS
-    skip nausea vomiting diarrhea chronic fatigue weight loss cough shortness of breath recurring fever chills night sweats rashes soresin the mouth nose on the genitals under the skin
+    skip nausea vomiting diarrhea chronic fatigue weight loss cough shortness of breath recurring fever chills night sweats rashes soresin the mouth nose on the genitals the skin
 @
 PNEUMONIA
     skip chest pain when you breathe cough fatigue fever sweating shaking chills feeling weak aches limb pain high temperature fever chest back pain sneezing cough spit mucus
@@ -21,96 +21,67 @@ CANCER
     skip blood in urine hoarseness persistent lumps swollen glands obvious change in a wart a mole indigestion difficulty swallowing uexpected weight loss night sweats fever itching in genital area
 @
 ALZHEIMER
-
+    skip memory loss confusion bad vision communication losing things forgetting forget mood changes swings talk less social lost low less energy fatigue language tasks lost
 @
 ANOREXIA
-
+    skip starvation underweight weight loss body image afraid gain weight dizzy dizziness faint fainting bad sleep constipation heart beat dehydration swollen arms legs no period 
 @
 ASTHMA
-
+    skip trouble sleeping wheezing coughing short breath chest tight tightness pain whistling sound exhale difficulty breathing hard inhaling tired quickly when exercise exercising
 @
 CANDIDIASIS
-
+    skip creamy white lesions on tongue inner cheeks roof of mouth gums tonsils raised lesions redness burning soreness cause difficulty eating swallowing bleeding rubbed scraped cracking corners mouth
 @
 EBOLA
-
+    skip fever headache joint and muscle aches chills weakness nausea and vomiting diarrhea bloody red eyes chest pain cough sore throat stomach pain weight loss bruising bruse bleed ears
 @
 EPILEPSY
-
+    skip temporary confusion staring uncontrollable jerking movements of the arms and legs loss of consciousness or awareness psychic symptoms fear anxiety deja vu
 @
-ALCOHOLISM
-
-@
-DRUG ADDICTION
-
-@
-HERPES
-
-@
-HEPATITIS
-
-@
-HIGH BLOOD PRESSURE/HYPERTENSION
-
+HEPATITIS B
+    skip abdominal pain dark urine fever joint pain loss of appetite nausea and vomiting weakness fatigue yellowing yellow of your skin and the whites of your eyes jaunidce
 @
 ANXIETY
-
-@
-INFERTILITY
-
+    skip feeling nervous restless tense sense of impending danger panic or doom increased heart rate breathing rapidly hyperventilation sweating trembling weak tired worry avoid things
 @
 CEREBRAL PALSY
-
+    skip muscle stiff floppy reflexes coordination tremors involuntary movements slow movement move delay walking drooling eating speaking precise motions seizures one side
 @
 LEGIONELLOSIS
-
-@
-LEPROSY
-
+    skip headache muscle pain chills fever high cough mucus sometimes blood shortness short of breath chest pain nausea vomiting and diarrhea confusion mental changes
 @
 LICE
-
+    skip intense itching tickling feeling from movement of hair lice on your scalp body clothing pubic body hair lice eggs nits on hair shafts small red bumps on the scalp neck and shoulders
 @
 LOW BLOOD PRESSURE/HYPOTENSION
-
-@
-OBESITY/OVERWEIGHT
-
-@
-OUTBREAKS
-
+    skip dizziness or lightheadedness fainting syncope blurred vision nausea fatigue lack of concentration confusion cold clammy pale skin rapid shallow breathing weak and rapid pulse
 @
 PARKINSON
-
-@
-PREGNANCY
-
+    skip tremor slow movements bradykinesia rigid muscles impaired posture balance loss of move movements speech changes writing changes memory loss motion weak
 @
 RABIES
-
+    skip fever headache nausea vomiting agitation anxiety confusion hyperactivity hiperactive difficulty swallowing hydrophobia fear of water insomnia hallucinations paralysis
 @
 RINGWORM
-
-@
+    skip round patches of scaly skin hair broken off scalp scaly gray or reddened areas small black dots brittle or fragile hair that easily pulls out tender or painful areas on the scalp
+    @
 RUBEOLA
-
+    skip fever dry cough runny nose sore throat inflamed eyes conjuctivitis tiny white spots with blue white centers on a red background inside mouth on the inner lining of the cheek
 @
 SCABIES
-
+    skip itching often severe and usually worse at night thin irregular burrow tracks made up of tiny blisters or bumps on your skin fingers armpits waist wrists inner elbows around breasts
 @
 STROKE
-
-@
-SWIMMER'S ITCH/ATHLETE'S FOOT
-
+    skip trouble speaking understanding communicating paralysis arm face leg trouble seeing one eye headache hard walk one side of face one arm only half movement 
 @
 TUBERCULOSIS
-
+    skip coughing blood chest pain breathing or cough unintentional weight loss fatigue fever night sweats chills loss of appetite kidneys spine back pain urine
 @
 TETANUS
-
+    skip spasms stiff jaw muscles difficult hard swallow swalloing abdominal abs ever sweating high blood pressure rapid heart rate spasms random painful
 @
 THROMBOSIS
-
+    skip pain in leg legs calf cramping soreness warmth warm affected leg red discolered skin sudden short of breath shortness dizzy lightheaded lightheadedness rapid pulse 
 @
 VARICELLA
+    skip fever tiredness loss of apetite headache rash itchy pimples pox fluid blisters scabs face chest back itch red redness inside mouth genital eyelids 
