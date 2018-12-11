@@ -1,6 +1,7 @@
 public class ContadorEstocastico{
  	private double probAdd;         // Probabilidade para adicionar novo elemento
-	private int n = 0;			    // Numero de elementos
+	private int n = 0;			    // Numero de elementos efetivos
+	private int sum = 0;			// Numero de elementos provaveis
 
 	// Caso nada seja especificado no construtor, executa o contador pela primeira forma
 	public ContadorEstocastico(){
@@ -21,7 +22,7 @@ public class ContadorEstocastico{
 	public void segundaSolucao(){
 		if(probAdd >= Math.random()) {
 			n++;
-			probAdd = 1/(Math.pow(2,n));		// Formula 2^-n
+			probAdd = 1/(Math.pow(2,n));		// Formula (2^-n)
 		}
 	}
 
@@ -34,11 +35,11 @@ public class ContadorEstocastico{
 	}
 
 	public String primeiraToString() {
-		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements (approximately): " + 2 * n;
+		sum = 2 * n;
+		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements (approximately): " + sum;
 	}
 
 	public String segundaToString() {
-		int sum = 0;
 		if(n == 0){
 			sum = 0;
 		}

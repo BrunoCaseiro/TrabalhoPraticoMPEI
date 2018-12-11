@@ -81,8 +81,8 @@ public class TestMinHash {
 
         // COM MINHASH
         // 0.0
-        // 0.2  (aproximadamente)
-        // 1.0  (aproximadamente)
-        // 0.25 (aproximadamente)
+        // 0.2  [aproximadamente]
+        // 1.0  [aproximadamente]
+        // 0.25 [aproximadamente]
     }
 }
