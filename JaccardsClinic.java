@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Sintomas{
+public class JaccardsClinic{
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws IOException {
         int choice;
@@ -74,18 +74,19 @@ public class Sintomas{
                 if (map.size()==0){
                     System.out.println("No diagnoses have yet been made to show a disease chart!");
                 }
+                else {
+                    for (int i = 0; i < map.size(); i++) {
+                        System.out.print(String.format("%20s %1s", map.get(i),"|"));
 
-                for (int i = 0; i < map.size(); i++) {
-                    System.out.print(String.format("%20s %1s", map.get(i),"|"));
+                        if(CBFdisease.isMember(map.get(i))){
+                            for (int j = 0; j < CBFdisease.count(map.get(i)); j++) {
+                                System.out.print("*");
+                            }
+                        } 
 
-                    if(CBFdisease.isMember(map.get(i))){
-                        for (int j = 0; j < CBFdisease.count(map.get(i)); j++) {
-                            System.out.print("*");
-                        }
-                    } 
-
-                    System.out.println();   
-                }  
+                        System.out.println();   
+                    }  
+                }
             }
 
             else if(choice == 4){
@@ -103,7 +104,7 @@ public class Sintomas{
 
 
     public static ArrayList<String> loadD(MinHash x) throws IOException{
-        File list = new File("list");
+        File list = new File("list.txt");
         Scanner fsc = new Scanner(list);
         ArrayList<String> map = new ArrayList<String>();
 
