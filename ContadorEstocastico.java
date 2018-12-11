@@ -47,8 +47,8 @@ public class ContadorEstocastico{
 			sum = 1;
 		}
 		else{
-			for (int i = 0; i <= n; i++) {
-				sum += 2^n;
+			for (int i = 0; i < n; i++) {
+				sum += 2^i;
 			}
 		}
 		return "Counter: " + n + "; Probability of adding next element: " + probAdd + "; Number of elements (approximately): " + sum;
